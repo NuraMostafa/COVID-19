@@ -39,13 +39,14 @@
         font-weight: 700;
         color: #2554C7;
       }
-      	a {
+         	a {
 		color: #2554C7;
 		margin-right: 60px;
 		font-size: 100;
 		width: 200px;
 
 	}
+
 	
 </style>
 </head>
@@ -84,7 +85,6 @@
 </div>
 </div>
 </header>
-
 	<section class="about_us padding_top">
 	
 			
@@ -95,10 +95,12 @@
 
 <div class="col-md-6 col-lg-6">
 	<h1> </h1>
-<div class="about_us_img">
-<img src="img/top_service.png" alt="">
+<div >
+<img src="img/admin.png" alt="">
 </div>
 </div>
+
+
 
 <div class="col-md-6 col-lg-5">
 	
@@ -110,23 +112,25 @@
 							<br/><br/>
 							<div class="form-row">
 								   <form class="form-group col-md-6">
-								   	<label>CT scan</label>
-     <input  class="form-control" id="inputEmail4" >
-     <input type="file" id="myFile" name="filename">
-      <label>CRP test</label>
-     <input  class="form-control" id="inputEmail4" >
-           <label>D-Dimer test</label>
-     <input  class="form-control" id="inputEmail4" >
-           <label>Ferritin</label>
-     <input  class="form-control" id="inputEmail4" >
-           <label>LDH</label>
-     <input  class="form-control" id="inputEmail4" >
-           <label>ALT</label>
-     <input  class="form-control" id="inputEmail4" >
-           <label>AST</label>
-     <input  class="form-control" id="inputEmail4" >
-          <label>CBC</label>
-     <input  class="form-control" id="inputEmail4" >
+								   	<h1>AddAdmin</h1>
+								   
+     <input  class="form-control" id="inputEmail4" placeholder="FirstName">
+     
+      <input  class="form-control" id="inputEmail4" placeholder="LastName">
+									<input  type="email" class="form-control" id="inputPassword4" placeholder="Email address">
+									<input  class="form-control" id="inputEmail4" placeholder="Username">
+									<input  type="password" class="form-control" id="inputEmail4" placeholder="Password">
+									<input type="password" class="form-control" id="inputEmail4" placeholder="Confirm Password">
+
+									<select class="form-control" id="Select">
+										<option value="1" selected>Select Gender</option>
+										<option value="2">Male</option>
+										<option value="3">Female</option>
+
+										<input type="date" class="form-control" id="birthday" placeholder="Your Birthday">
+
+									</select>
+
      <b></b>
   
     

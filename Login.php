@@ -39,14 +39,14 @@
 </style>
 </head>
 <body>
-
-	<section class="regervation_part section_padding">
+	<section class="our_depertment section_padding">
 		<div class="container">
+
 			<div class="row align-items-center regervation_content">
 				<div class="col-lg-7">
 					<div class="regervation_part_iner">
 						<form>
-							<h1>Login</h1>
+							<h1>SignIn</h1>
 							<br/><br/>
 							<div class="form-row">
 								<div class="form-group col-md-6">
@@ -73,8 +73,8 @@
 					</div>
 				</div>
 				
-				</div>
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 </body>
