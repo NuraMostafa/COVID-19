@@ -11,6 +11,7 @@
 
 	<link rel="stylesheet" href="css/animate.css">
 
+
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 
 	<link rel="stylesheet" href="css/themify-icons.css">
@@ -72,7 +73,7 @@
 <a  href="Home.php">Logout</a>
 </li>
 <li class="nav-item">
-<a href="SignUp.php">Signup</a>
+<a href="register.php">Signup</a>
 </li>
 <li class="nav-item">
 <a href="View profile.php">My Profile</a>
@@ -152,6 +153,7 @@
 </section>
 
 </body>
+<?php include("footer.php"); ?>
 </html>
 
 						
