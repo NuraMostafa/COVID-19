@@ -54,10 +54,10 @@
 
 
 <li class="nav-item">
-<a  href="Login.php">Login</a>
+<a  href="login.php">Login</a>
 </li>
 <li class="nav-item">
-<a href="SignUp.php">Signup</a>
+<a href="register.php">Signup</a>
 </li>
 <li class="nav-item">
 <a href="Contact.php">Contact</a>
