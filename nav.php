@@ -9,16 +9,16 @@
 require_once("connect.php");
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-dark primary-color" style="background-color: blue;">
+<nav class="navbar navbar-expand-lg navbar-dark primary-color" style="background-color: white;">
 
     <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">Virtual covid detector</a>
+    <a style="color:black;" class="navbar-brand" href="#">Virtual Covid Detector</a>
 
     <!-- Collapse button -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    <!-- <button style="color:black;" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
             aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+        <span style="color:black;"class="navbar-toggler-icon"></span>
+    </button> -->
 
     <!-- Collapsible content -->
     <div class="collapse navbar-collapse" id="basicExampleNav">
@@ -29,19 +29,21 @@ require_once("connect.php");
             <?php if (isset($_SESSION['userID'])) {
               if ($_SESSION['userType'] == "Doctor") { ?>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php"><i class="fa fa-user-circle"></i> Users</a>
+                        <a  style="color:black;" class="nav-link" href="index.php"><i class="fa fa-user-circle"></i> Users</a>
                     </li>
                 <?php } ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a>
+                    <a style="color:black;" class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a>
                 </li>
-            <?php } else { ?>
+            <?php } 
+            
+            else { ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="register.php" class="w3-bar-item w3-button"><i
+                    <a style="color:black;"  class="nav-link" href="register.php" class="w3-bar-item w3-button"><i
                                 class="fa fa-registered"></i> Register</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="login.php"><i class="fa fa-user"></i> Login</a>
+                    <a style="color:black;" class="nav-link" href="login.php"><i class="fa fa-user"></i> Login</a>
                 </li>
             <?php } ?>
         </ul>
