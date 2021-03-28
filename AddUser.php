@@ -2,7 +2,7 @@
 <?php
 require_once("connect.php");
 
-if(isset($_SESSION['User_type'])){
+if(isset($_SESSION['userID'])){
     header("Location:AddUser.php");
 }
 
