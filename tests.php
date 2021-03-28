@@ -1,159 +1,132 @@
+<?php
+require_once("connect.php");
+
+if(isset($_SESSION['userID'])){
+    header("Location:index.php");
+}
+
+if(isset($_POST['submit'])){
+    $CPR = $_POST['CPR'];
+    $Ferritin = $_POST['Ferritin'];
+    $LDH = $_POST['LDH'];
+    $ALT = $_POST['ALT'];
+    $CBC = $_POST['CBC'];
+    $DDimer = $_POST['DDimer'];
+    $AST = $_POST['AST'];
+    $email = $_POST['email'];
+    $image = $_FILES['image']['name'];
+    $target = "images/" . basename($image);
+
+    $query = "INSERT INTO tests (`CPR`, `Ferritin`, `LDH`, `ALT`, `CBC`, `DDimer`, `AST`, `email`, `image`) VALUES ('$CPR', '$Ferritin', '$LDH', '$ALT', '$CBC', '$DDimer', '$AST', '$email', '$target')";
+    $result = mysqli_query($connection, $query);
+
+    if($result){
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $target)) {
+            echo "<script>alert('data success.')</script>";
+        } 
+        else {
+            echo "<script>alert('data fail.')</script>";
+        }
+        $query2 = "SELECT * FROM tests WHERE email = '$email'";
+        $result2 = mysqli_query($connection, $query2);
+        if($result2){
+            if(mysqli_num_rows($result2) > 0 ){
+                $row = mysqli_fetch_array($result2);
+                $userID = $row[0];
+                $userEmail = $row[8];
+                $_SESSION['userID'] = $userID;
+                $_SESSION['userEmail'] = $userEmail;
+                echo "<script>location.replace('index.php');</script>";
+            }
+        }
+        else {
+            echo "<script>alert('Error performing query, please try agian.')</script>";
+        }
+    }
+    else {
+        echo "<script>alert('Error performing query, please try agian.')</script>";
+    }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
-
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>COVID</title>
-	<link rel="icon" href="img/favicon.png">
-
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-
-	<link rel="stylesheet" href="css/animate.css">
-
-
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-
-	<link rel="stylesheet" href="css/themify-icons.css">
-
-	<link rel="stylesheet" href="css/flaticon.css">
-
-	<link rel="stylesheet" href="css/magnific-popup.css">
-
-	<link rel="stylesheet" href="css/nice-select.css">
-
-	<link rel="stylesheet" href="css/slick.css">
-
-	<link rel="stylesheet" href="css/style.css">
-	<style>
-	
-	h1 {
-		
-		font-weight: 700;
-		color: #2554C7;
-		font-size: 44px;
-		margin-left: 8;
-		
-	}
-	  label {
-        font-size: 20px;
-        font-weight: 700;
-        color: #2554C7;
-      }
-      	a {
-		color: #2554C7;
-		margin-right: 60px;
-		font-size: 100;
-		width: 200px;
-
-	}
-	
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>tests</title>
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
 </head>
+<style>
+  body {
+            text-align: center;
+            align: center;
+
+        }
+
+.x {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.sub {
+  width: 300px;
+  background-color: blue;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sub:hover {
+  background-color: #45a049;
+}
+
+.form{
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+</style>
 <body>
-	<br/><br/>
-	<header class="main_menu home_menu">
+<?php include("nav.php"); ?>
 <div class="container">
-<div class="row align-items-center">
-<div class="col-lg-12">
-<nav class="navbar navbar-expand-lg navbar-light">
-<a href="Home.php"> <img src="img/Coronavirus-Raw-Materials.png" alt="logo"> </a>
-<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-<span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse main-menu-item justify-content-center" id="navbarSupportedContent">
-<ul class="navbar-nav align-items-center">
-<li class="nav-item active">
-<a href="index.html">Home</a>
-</li>
-
-
-
-<li class="nav-item">
-<a  href="Home.php">Logout</a>
-</li>
-<li class="nav-item">
-<a href="register.php">Signup</a>
-</li>
-<li class="nav-item">
-<a href="View profile.php">My Profile</a>
-</li>
-</ul>
-</div>
-</nav>
+    <br><br>
+    <h1 style="text-align: center;">Register</h1><br>
+  <div class="form">
+    <form method="POST" action="" enctype="multipart/form-data" style="text-align: center;">
+        <input type="email" class="x" placeholder="Enter your email..." required name="email" onkeyup="filter(this)" id="email"><br><br>
+        <input type="number" class="x" placeholder="CPR" required name="CPR" onkeyup="filter(this)" id="CPR"><br><br>
+        <input type="number" class="x" placeholder="Ferritin" required name="Ferritin" onkeyup="filter(this)" id="Ferritin"><br><br>
+        <input type="number" class="x" placeholder="LDH" required name="LDH" onkeyup="filter(this)" id="LDH"><br><br>
+        <input type="number" class="x" placeholder="ALT" required name="ALT" onkeyup="filter(this)" id="ALT"><br><br>
+        <input type="number" class="x" placeholder="CBC" required name="CBC" onkeyup="filter(this)" id="CBC"><br><br>
+        <input type="number" class="x" placeholder="DDimer" required name="DDimer" onkeyup="filter(this)" id="DDimer"><br><br>
+        <input type="number" class="x" placeholder="AST" required name="AST" onkeyup="filter(this)" id="AST"><br><br>
+        <input type="file" accept="image/*" name="image" required><br><br>
+        <button type="submit" name="submit" class="sub" class="btn btn-primary">Submit</button>
+    </form>
 </div>
 </div>
-</div>
-</header>
-
-	<section class="about_us padding_top">
-	
-			
-	
-<div class="container">
-
-<div class="row justify-content-between align-items-center">
-
-<div class="col-md-6 col-lg-6">
-	<h1> </h1>
-<div class="about_us_img">
-<img src="img/top_service.png" alt="">
-</div>
-</div>
-
-<div class="col-md-6 col-lg-5">
-	
-			<div class="row align-items-center regervation_content">
-				<div class="col-lg-7">
-					<div class="regervation_part_iner">
-						<form>
-							
-							<br/><br/>
-							<div class="form-row">
-								   <form class="form-group col-md-6">
-								   	<label>CT scan</label>
-     <input  class="form-control" id="inputEmail4" >
-     <input type="file" id="myFile" name="filename">
-      <label>CRP test</label>
-     <input  class="form-control" id="inputEmail4" >
-           <label>D-Dimer test</label>
-     <input  class="form-control" id="inputEmail4" >
-           <label>Ferritin</label>
-     <input  class="form-control" id="inputEmail4" >
-           <label>LDH</label>
-     <input  class="form-control" id="inputEmail4" >
-           <label>ALT</label>
-     <input  class="form-control" id="inputEmail4" >
-           <label>AST</label>
-     <input  class="form-control" id="inputEmail4" >
-          <label>CBC</label>
-     <input  class="form-control" id="inputEmail4" >
-     <b></b>
-  
-    
-								<a href="#" class="btn_2">Submit</a>
-							
-
-        </form>
-								
-
-									
-								
-
-
-
-</div>
-</form>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/wow.min.js"></script>
+<script src="js/owl.carousel.js"></script>
+<script src="js/main.js"></script>
+<script>
+    new WOW().init();
+</script>
 </body>
-<?php include("footer.php"); ?>
 </html>
-
-						
