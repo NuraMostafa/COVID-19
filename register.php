@@ -8,16 +8,17 @@ if(isset($_SESSION['userID'])){
 if(isset($_POST['submit'])){
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $Gender = $_POST['gender'];
-    $Username = $_POST['username'];
+    $Gender = $_POST['Gender'];
+    $Username = $_POST['Username'];
     $dateofbirth = $_POST['dateofbirth'];
-    
 
 
    // $image = $_FILES['image']['name'];
     //$target = "images/" . basename($image);
 
+
     $query = "INSERT INTO users(email,password,User_type,Gender,Username,dateofbirth) VALUES ('$email','$password',2,'$Gender','$Username','$dateofbirth')";
+
     $result = mysqli_query($connection, $query);
 
     if($result){
@@ -42,19 +43,20 @@ if(isset($_POST['submit'])){
                 $_SESSION['userType'] = $userType;
                 $_SESSION['Username'] = $Username;
 
-                echo "<script>location.replace('doctorview.php');</script>";
+                echo "<script>location.replace('index.php');</script>";
             }
         }
         else {
-            echo "<script>alert('Error performing query, please try again.')</script>";
+            echo "<script>alert('Error performing query, please try agian.')</script>";
         }
         
     }
     else {
-        echo "<script>alert('Error performing query 2, please try again.')</script>";
+        echo "<script>alert('Error performing query, please try agian.')</script>";
     }
 }
 ?>
+
 
 <!doctype html>
 <html lang="en">
@@ -70,26 +72,26 @@ if(isset($_POST['submit'])){
     <link rel="stylesheet" href="css/owl.theme.default.min.css">
     <link rel="icon" href="img/favicon.png">
 
-	<link rel="stylesheet" href="css/themify-icons.css">
+  <link rel="stylesheet" href="css/themify-icons.css">
 
-	<link rel="stylesheet" href="css/flaticon.css">
+  <link rel="stylesheet" href="css/flaticon.css">
 
-	<link rel="stylesheet" href="css/magnific-popup.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
 
-	<link rel="stylesheet" href="css/nice-select.css">
+  <link rel="stylesheet" href="css/nice-select.css">
 
-	<link rel="stylesheet" href="css/slick.css">
+  <link rel="stylesheet" href="css/slick.css">
 
-	<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <!-- <style>
 h1 {
-		
-		font-weight: 700;
-		color: #ffffff;
-		font-size: 44px;
-		
-	}
+    
+    font-weight: 700;
+    color: #ffffff;
+    font-size: 44px;
+    
+  }
     </style> -->
 <!-- <style>
   body {
@@ -139,23 +141,23 @@ h1 {
 <!-- <div class="row justify-content-between align-items-center">
 
 <div class="col-md-6 col-lg-6">
-	<h1> </h1>
+  <h1> </h1>
 <div class="about_us_img">
 <img src="img/top_service.png" alt="">
 </div>
 </div>
 
 <div class="col-md-6 col-lg-5">
-	
-			<div class="row align-items-center regervation_content">
-				<div class="col-lg-7">
-					<div class="regervation_part_iner">
-						<form>
-							
-							<br/><br/>
-							<div class="form-row">
-								   <form class="form-group col-md-6">
-								   	<label>CT scan</label>
+  
+      <div class="row align-items-center regervation_content">
+        <div class="col-lg-7">
+          <div class="regervation_part_iner">
+            <form>
+              
+              <br/><br/>
+              <div class="form-row">
+                   <form class="form-group col-md-6">
+                    <label>CT scan</label>
      <input  class="form-control" id="inputEmail4" >
      <input type="file" id="myFile" name="filename">
       <label>CRP test</label>
@@ -175,14 +177,14 @@ h1 {
      <b></b>
   
     
-								<a href="#" class="btn_2">Submit</a>
-							
+                <a href="#" class="btn_2">Submit</a>
+              
 
         </form>
-								
+                
 
-									
-								
+                  
+                
 
 
 
@@ -203,11 +205,11 @@ h1 {
     <h1 >Register</h1><br>
     
     <div class="row justify-content-between align-items-center">
-				<div class="col-lg-7">
-					<div class="regervation_part_iner">
+        <div class="col-lg-7">
+          <div class="regervation_part_iner">
 
                     <div class="form-row">
-								<div class="form-group col-md-6">
+                <div class="form-group col-md-6">
 
     <form method="POST" action="" enctype="multipart/form-data" >
     <h4 >Username</h4>
@@ -219,13 +221,13 @@ h1 {
         <h4 >Confirm Password</h4>
         <input type="password" class="form-control" id="inputEmail4" placeholder="Confirm Password" required name="Confirmpassword" onkeyup="filter(this)" id="registerconfirmpassword"><br>
         <h4 >Select Gender</h4>
-       <select name="gender" class="form-control" id="Select">
-			<option selected>Select Gender</option>
-			<option >Male</option>
-			<option >Female</option>
-			
+       <select name="Gender" class="form-control" id="Select">
+      <option selected>Select Gender</option>
+      <option >Male</option>
+      <option >Female</option>
+      
 
-			</select required>
+      </select required>
             <br>
             <h4 >Date of Birth</h4>
             <input type="date" name= "dateofbirth" class="form-control" id="birthday" placeholder="Your Birthday">
@@ -241,10 +243,10 @@ h1 {
     </div>
     </div>
     <div class="col-lg-5 col-md-6">
-					<div class="reservation_img">
-						<img src="img/reservation.png" alt="" class="reservation_img_iner">
-					</div>
-				</div>
+          <div class="reservation_img">
+            <img src="img/reservation.png" alt="" class="reservation_img_iner">
+          </div>
+        </div>
 </div>
 </div>
 </section>
