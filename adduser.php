@@ -3,7 +3,7 @@
 require_once("connect.php");
 
 if(isset($_SESSION['userID'])){
-    header("Location:AddUser.php");
+    header("Location:addnourhanuser.php");
 }
 
 if(isset($_POST['submit'])){
@@ -119,7 +119,6 @@ if(isset($_POST['submit'])){
         <h4 >Select Usertype</h4>
        <select name="User_type" class="form-control" id="Select">
       <option selected>Select Usertype</option>
-      <option >Patient</option>
       <option >Admin</option>
       <option >Doctor</option>
 
