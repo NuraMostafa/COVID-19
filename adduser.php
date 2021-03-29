@@ -1,53 +1,4 @@
 
-<?php
-require_once("connect.php");
-
-if(isset($_SESSION['userID'])){
-    header("Location:addnourhanuser.php");
-}
-
-if(isset($_POST['submit'])){
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $User_type = $_POST['User_type'];
-    $Gender = $_POST['Gender'];
-    $Username = $_POST['Username'];
-    $dateofbirth = $_POST['dateofbirth'];
-    $query = "INSERT INTO users(email,password,User_type,Gender,Username,dateofbirth) VALUES ('$email','$password', '$User_type','$Gender','$Username','$dateofbirth')";
-
-    $result = mysqli_query($connection, $query);
-
-    if($result){
-
-        $query2 = "SELECT * FROM users WHERE email = '$email'";
-        $result2 = mysqli_query($connection, $query2);
-        if($result2){
-            if(mysqli_num_rows($result2) > 0 ){
-                $row = mysqli_fetch_array($result2);
-                $userID = $row[0];
-                $userEmail = $row[1];
-                $userType = $row[3];
-                $Username = $row[6];
-
-
-                $_SESSION['userID'] = $userID;
-                $_SESSION['userEmail'] = $userEmail;
-                $_SESSION['userType'] = $userType;
-                $_SESSION['Username'] = $Username;
-
-                echo "<script>location.replace('Addadmindoctor.php');</script>";
-            }
-        }
-        else {
-            echo "<script>alert('Error performing query, please try agian.')</script>";
-        }
-        
-    }
-    else {
-        echo "<script>alert('Error performing query, please try agian.')</script>";
-    }
-}
-?>
 
 
 
@@ -107,17 +58,17 @@ if(isset($_POST['submit'])){
                     <div class="form-row">
                 <div class="form-group col-md-6">
 
-    <form method="POST" action="" enctype="multipart/form-data" >
+    <form method="POST" action="adduserphp.php" enctype="multipart/form-data" >
     <h4 >Username</h4>
-        <input  class="x" name = "Username" id="inputEmail4" placeholder="Username"><br>
+        <input  class="form-control" name = "Username" id="inputEmail4" placeholder="Username"><br>
         <h4 >Email</h4>
-        <input type="email" class="x" placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail"><br>
+        <input type="email" class="form-control" placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail"><br>
         <h4 >Password</h4>
-        <input type="password" class="x" placeholder="Enter your password" required name="password" onkeyup="filter(this)" id="registerpassword"><br>
+        <input type="password" class="form-control" placeholder="Enter your password" required name="password" onkeyup="filter(this)" id="registerpassword"><br>
         <h4 >Confirm Password</h4>
-        <input type="password" class="x" id="inputEmail4" placeholder="Confirm Password" required name="Confirmpassword" onkeyup="filter(this)" id="registerconfirmpassword"><br>
+        <input type="password" class="form-control" id="inputEmail4" placeholder="Confirm Password" required name="Confirmpassword" onkeyup="filter(this)" id="registerconfirmpassword"><br>
         <h4 >Select Usertype</h4>
-       <select name="User_type" class="x" id="Select">
+       <select name="User_type" class="form-control" id="Select">
       <option selected>Select Usertype</option>
       <option >Admin</option>
       <option >Doctor</option>
@@ -127,7 +78,7 @@ if(isset($_POST['submit'])){
 
 
         <h4 >Select Gender</h4>
-       <select name="Gender" class="x" id="Select">
+       <select name="Gender" class="form-control" id="Select">
       <option selected>Select Gender</option>
       <option >Male</option>
       <option >Female</option>
@@ -135,7 +86,7 @@ if(isset($_POST['submit'])){
       </select required>
             <br>
             <h4 >Date of Birth</h4>
-            <input type="date" name= "dateofbirth" class="x" id="birthday" placeholder="Your Birthday">
+            <input type="date" name= "dateofbirth" class="form-control" id="birthday" placeholder="Your Birthday">
 
       <br>
         <!-- <input type="file" accept="image/*" name="image" ><br><br> -->
