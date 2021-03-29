@@ -41,7 +41,7 @@ $result = mysqli_query($connection, $query);
                     <thead>
                        <td>ID</td>
                        <td>Email</td> 
-                       <td>User Type</td>
+                       <td>Gender</td>
                        <td>Edit</td> 
                         <td>delete</td> 
                      
@@ -56,7 +56,7 @@ $result = mysqli_query($connection, $query);
               
 
                     <td><?php echo $rows[0]; ?></td>
-                    <td><?php echo $rows[1]; ?></td>
+                    <td><?php echo $rows[2]; ?></td>
                      <td><?php echo $rows[3]; ?></td>
                      <td><a href="Edit.php?edit=<?php echo $rows[0]; ?>"> Edit </a></td>
 
