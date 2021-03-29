@@ -92,26 +92,9 @@ $result = mysqli_query($connection, $query);
 </script>
 
 <script>
-    $("#new").hide();
-
-    function search() {
-        var x = $("#searchtext").val();
-        if (x != "") {
-            $("#old").hide();
-            jQuery.ajax({
-                url: 'ajax.php',
-                type: 'post',
-                data: 'searchtext=' + x,
-                success: function (data) {
-                    $("#new").html(data);
-                    $("#new").show();
-                }
-            });
-        } else {
-            $("#new").hide();
-            $("#old").show();
-        }
-    }
+$(document).ready( function () {
+    $('searchtext').DataTable();
+} );
 </script>
 </section>
 <?php include("footer.php"); ?>
