@@ -78,6 +78,11 @@ $result = mysqli_query($connection, $query);
         ?>
         </tbody>
     </table>
+    <br> <br>
+    
+    <div class="regerv_btn">
+        <a href="adduser.php" class="btn_2">Add User</a>
+        </div>
 </div>
 
 <script src="js/jquery-3.4.1.min.js"></script>
