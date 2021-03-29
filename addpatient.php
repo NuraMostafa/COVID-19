@@ -88,11 +88,11 @@ if(isset($_POST['submit'])){
 
     <form method="POST" action="" enctype="multipart/form-data" >
     <h4 >Username</h4>
-        <input  class="form-control" name = "Username" id="inputEmail4" placeholder="Username"><br>
+        <input  class="x" name = "Username" id="inputEmail4" placeholder="Username"><br>
         <h4 >Email</h4>
-        <input type="email" class="form-control" placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail"><br>
+        <input type="email" class="x" placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail"><br>
         <h4 >Select Gender</h4>
-       <select name="Gender" class="form-control" id="Select">
+       <select name="Gender" class="x" id="Select">
       <option selected>Select Gender</option>
       <option >Male</option>
       <option >Female</option>
@@ -100,7 +100,7 @@ if(isset($_POST['submit'])){
       </select required>
             <br>
             <h4 >Date of Birth</h4>
-            <input type="date" name= "dateofbirth" class="form-control" id="birthday" placeholder="Your Birthday">
+            <input type="date" name= "dateofbirth" class="x" id="birthday" placeholder="Your Birthday">
 
       <br>
         <!-- <input type="file" accept="image/*" name="image" ><br><br> -->
