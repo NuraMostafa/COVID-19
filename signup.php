@@ -32,7 +32,7 @@ if(isset($_POST['submit'])){
                 $_SESSION['userType'] = $userType;
                 $_SESSION['Username'] = $Username;
 
-                echo "<script>location.replace('doctorview.php');</script>";
+              echo "<script>location.replace('test.php');</script>";
             }
         }
         else {
