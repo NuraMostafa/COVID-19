@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2021 at 04:23 PM
+-- Generation Time: Mar 29, 2021 at 10:34 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.33
 
@@ -45,6 +45,26 @@ INSERT INTO `patients` (`id`, `Username`, `email`, `Gender`, `dateofbirth`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `results`
+--
+
+CREATE TABLE `results` (
+  `id` int(100) NOT NULL,
+  `email` varchar(300) NOT NULL,
+  `gender` varchar(300) NOT NULL,
+  `Status` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `results`
+--
+
+INSERT INTO `results` (`id`, `email`, `gender`, `Status`) VALUES
+(1, 'nourhan@gmail.com', 'Female', 'Positive');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tests`
 --
 
@@ -67,16 +87,23 @@ CREATE TABLE `tests` (
 
 INSERT INTO `tests` (`id`, `CPR`, `Ferritin`, `LDH`, `ALT`, `CBC`, `DDimer`, `AST`, `email`, `image`) VALUES
 (4, '10', '20', '30', '40', '50', '16', '20', 'nouraatef43@yahoo.com', 'images/pirate.jpg'),
-(5, 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'images/doctor use case (1).png'),
-(6, 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'images/police.jpg'),
 (7, '123', '123', '123', '123', '123', '123', '123', 'nouraatef43@yahoo.com', 'Empty'),
-(8, 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'images/police.jpg'),
-(9, 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'images/police.jpg'),
-(10, '12', '13', '15', '16', '18', '19', '188', 'nono@gmail.com', 'Empty'),
-(11, '12', '13', '14', '15', '16', '17', '18', 'nouraatef43@yahoo.com', 'Empty'),
-(12, 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'Empty', 'images/police.jpg'),
 (13, '', '', '', '', '', '', '', 'nourhan@gmail.com', 'images/police.jpg'),
-(14, '12', '13', '14', '', '', '', '', 'nouraatef43@yahoo.com', 'images/police.jpg');
+(14, '12', '13', '14', '', '', '', '', 'nouraatef43@yahoo.com', 'images/police.jpg'),
+(16, '', '', '', '', '', '', '', 'nouraatef43@yahoo.com', 'image/pirate.jpg'),
+(17, '', '', '', '', '', '', '', 'nouraatef43@yahoo.com', 'image/pirate.jpg'),
+(18, '', '', '', '', '', '', '', 'marwa@gmail.com', 'image/algo1.png'),
+(19, '', '', '', '', '', '', '', 'samira@gmail.com', 'image/pirate.jpg'),
+(20, '', '', '', '', '', '', '', 'loli@gmail.com', 'images/police.jpg'),
+(21, '', '', '', '', '', '', '', 'saloma@gmail.com', 'images/police.jpg'),
+(22, '', '', '', '', '', '', '', 'saloma@gmail.com', 'images/police.jpg'),
+(23, '', '', '', '', '', '', '', 'nouraatef43@yahoo.com', 'images/pirate.jpg'),
+(24, '', '', '', '', '', '', '', 'ALAA@gmail.com', 'images/police.jpg'),
+(25, '', '', '', '', '', '', '', 'koki@gmail.com', 'images/police.jpg'),
+(26, '', '', '', '', '', '', '', 'amira@gmail.com', 'images/pirate.jpg'),
+(27, '', '', '', '', '', '', '', 'moody@gmail.com', 'images/pirate.jpg'),
+(28, '', '', '', '', '', '', '', 'yousseff@gmail.com', 'images/police.jpg'),
+(29, '', '', '', '', '', '', '', 'osman@gmail.com', 'images/police.jpg');
 
 -- --------------------------------------------------------
 
@@ -101,7 +128,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `email`, `Password`, `User_type`, `Gender`, `Username`, `dateofbirth`) VALUES
 (21, 'amr@gmail.com', '123456', 'Doctor', 'Male', 'amrmohamed', '1998-3-25'),
 (22, 'nouraatef43@yahoo.com', '123456', 'Patient', 'Female', 'nouraatef', '1999-9-1'),
-(25, 'dodo@gmail.com', '123456', 'patient', 'Male', 'dod', '1997-03-25'),
+(25, 'dodo@gmail.com', '123456', 'Patient', 'Male', 'dod', '1997-03-25'),
 (26, 'nourhan@gmail.com', '123456', 'Admin', 'Female', 'zozo', '1965-03-101');
 
 --
@@ -112,6 +139,12 @@ INSERT INTO `users` (`id`, `email`, `Password`, `User_type`, `Gender`, `Username
 -- Indexes for table `patients`
 --
 ALTER TABLE `patients`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `results`
+--
+ALTER TABLE `results`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -137,10 +170,16 @@ ALTER TABLE `patients`
   MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `results`
+--
+ALTER TABLE `results`
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `tests`
 --
 ALTER TABLE `tests`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `users`
