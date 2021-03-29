@@ -44,7 +44,6 @@ $result = mysqli_query($connection, $query);
                        <td>Gender</td>
                        <td>Edit</td> 
                         <td>delete</td> 
-                     
                     </thead>
      <?php
         $sql = "SELECT * FROM `patients`";
@@ -80,6 +79,13 @@ $result = mysqli_query($connection, $query);
         ?>
         </tbody>
     </table>
+    
+    <br><br>
+    <div>
+    <div class="regerv_btn">
+        <a href="addpatient.php" class="btn_2">Add Patient</a>
+        </div>
+        </div>
 </div>
 
 <script src="js/jquery-3.4.1.min.js"></script>
@@ -92,9 +98,26 @@ $result = mysqli_query($connection, $query);
 </script>
 
 <script>
-$(document).ready( function () {
-    $('searchtext').DataTable();
-} );
+    $("#new").hide();
+
+    function search() {
+        var x = $("#searchtext").val();
+        if (x != "") {
+            $("#old").hide();
+            jQuery.ajax({
+                url: 'ajax.php',
+                type: 'post',
+                data: 'searchtext=' + x,
+                success: function (data) {
+                    $("#new").html(data);
+                    $("#new").show();
+                }
+            });
+        } else {
+            $("#new").hide();
+            $("#old").show();
+        }
+    }
 </script>
 </section>
 <?php include("footer.php"); ?>
@@ -112,3 +135,6 @@ if (isset($_GET["delete"])) {
     }
 
 }
+
+
+?>
