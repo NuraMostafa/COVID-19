@@ -25,6 +25,14 @@
 
 	<link rel="stylesheet" href="css/style.css">
 </head>
+<style >
+    td{
+      color: black;
+    }
+	tr{
+      color: black;
+    }
+  </style>
 <body>
 	<br/><br/>
 	<?php include("header.php"); ?>
@@ -44,30 +52,72 @@
 <div class="form-row">
 							
 <form class="form-group col-md-6">
+</div>
+<table>
+<tr>
+                    <thead>
+                       <td>ID</td>
+                       <td>Email</td> 
+                       <td>Gender</td> 
+                        <td>Status</td> 
 
-<h4>ID:</h4> <br><br>
+                    </thead>
+<!-- <h4>ID:</h4> <br><br>
 
 
-<h4>Name:</h4> <br><br>
+<h4>Email:</h4> <br><br>
 
 
-<h4>Gender:</h4> <br><br>
+<h4>:</h4> <br><br>
 
 
-<h4>Status:</h4>
+<h4>:</h4>
 
-<br><br>
+<br><br> -->
+<?php
+        $sql = "SELECT * FROM `results`";
+        $result = mysqli_query($connection, $sql);
+        $count = mysqli_num_rows($result);
+        if ($count > 0) {
+            while ($rows = mysqli_fetch_array($result)) {
+                ?>
+                    <td><?php echo $rows[0]; ?></td>
+                    <td><?php echo $rows[1]; ?></td>
+                    <td><?php echo $rows[2]; ?></td>
+					<td><?php echo $rows[3]; ?></td>
+                    
+                </tr>
+                <?php
+            }
+            ?>
+
+            <?php
+
+        } else {
+
+            echo "No data to view";
+
+        }
+
+        ?>
+		</tbody>
+    </table>
+	<br><br>
+	</div>
+<div>
               <div class="regerv_btn">
 
         <button type="submit" name="print" class="btn_2" onclick="window.print()"> Print Result</button>
 
         </div>
+		</div>
+		<div>
         <br><br>
  
         <div class="regerv_btn">
-        <a href="testnourhan.php" class="btn_2">Add New Test</a>
+        <a href="test.php" class="btn_2">Add New Test</a>
         </div>
-
+		</div>
 							
 
         </form>
