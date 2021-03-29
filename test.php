@@ -21,6 +21,7 @@ if(isset($_POST['submit'])){
       echo "<script>alert('Image uploaded successfully, thank you.')</script>";
     }
     echo "<script>alert('Data Uploaded successfully.')</script>";
+    echo "<script>location.replace('results.php');</script>";
   }
   else {
     echo "<script>alert('Error performing query, please try again.')</script>";
