@@ -60,35 +60,35 @@ require_once("connect.php");
 <?php if (isset($_SESSION['User_type'])) {
 
   if ($_SESSION['User_type'] == "Doctor") { ?>
-		<li class="nav-item">
-			<a  class="nav-link" href="home.php"><i class="fa fa-user-circle"></i> Home</a>
+		<li class="nav-item active">
+			<a   href="home.php">Home</a>
 		</li>
-		<li class="nav-item">
-		<a  class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a>
+		<li class="nav-item active">
+		<a  href="logout.php">Logout</a>
 	</li>
 	<?php } 
 
 	 if ($_SESSION['User_type'] == "Patient") { ?>
 
-		<li class="nav-item">
-		<a class="nav-link" href="testnourhan.php"> Tests</a>
+		<li class="nav-item active">
+		<a  href="test.php"> Tests</a>
 	</li>
 
-		<li class="nav-item">
-		<aclass="nav-link" href="results.php"> Results</a>
+		<li class="nav-item active">
+		<a href="results.php"> Results</a>
 	</li>
-		<li class="nav-item">
-		<a class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a>
+		<li class="nav-item active">
+		<a  href="logout.php"> Logout</a>
 	</li>
 	<?php } 
 
 	 if ($_SESSION['User_type'] == "Admin") { ?>
 
-		<li class="nav-item">
-			<a  class="nav-link" href="adminview.php"><i class="fa fa-user-circle"></i>View Users</a>
+		<li class="nav-item active">
+			<a   href="adminview.php" >View Users</a>
 		</li>
-<li class="nav-item">
-<a  class="nav-link" href="logout.php"><i class="fa fa-sign-out"></i> Logout</a>
+<li class="nav-item active">
+<a   href="logout.php"> Logout</a>
 </li>
 <?php } ?>
 	
