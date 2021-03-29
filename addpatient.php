@@ -2,7 +2,7 @@
 require_once("connect.php");
 
 if(isset($_SESSION['userID'])){
-    header("Location:addpatient.php");
+    header("Location:addpatientnourhan.php");
 }
 
 if(isset($_POST['submit'])){
@@ -31,7 +31,7 @@ if(isset($_POST['submit'])){
                 $_SESSION['userEmail'] = $userEmail;
 
 
-                echo "<script>location.replace('index.php');</script>";
+                echo "<script>location.replace('doctorview.php');</script>";
             }
         }
         else {
