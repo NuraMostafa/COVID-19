@@ -75,12 +75,12 @@ if (isset($_POST['submit'])) {
 
     <form method="POST" action="" enctype="multipart/form-data" >
     <h4 >Username</h4>
-        <input  class="form-control" name = "editUsername" id="inputEmail4" placeholder="Username" value="<?php echo $row[1];?>"><br>
+        <input  class="x" name = "editUsername" id="inputEmail4" placeholder="Username" value="<?php echo $row[1];?>"><br>
         <h4 >Email</h4>
-        <input type="email" class="form-control" placeholder="Enter your email" required name="editemail" onkeyup="filter(this)" id="registeremail" value="<?php echo $row[2];?>"><br>
+        <input type="email" class="x" placeholder="Enter your email" required name="editemail" onkeyup="filter(this)" id="registeremail" value="<?php echo $row[2];?>"><br>
    
         <h4 >Select Gender</h4>
-       <select name="editGender" class="form-control" id="Select">
+       <select name="editGender" class="x" id="Select">
       <option disabled="">Select Gender</option>
       <?php 
         if($row[3] == "Female"){ ?>
@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
       </select required>
             <br>
             <h4 >Date of Birth</h4>
-            <input type="date" name= "editdateofbirth" class="form-control" id="birthday" placeholder="Your Birthday" value="<?php echo $row[4];?>">
+            <input type="date" name= "editdateofbirth" class="x" id="birthday" placeholder="Your Birthday" value="<?php echo $row[4];?>">
 
       <br>
         <div class="regerv_btn">
