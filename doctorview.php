@@ -56,11 +56,11 @@ $result = mysqli_query($connection, $query);
               
 
                     <td><?php echo $rows[0]; ?></td>
-                    <td><?php echo $rows[2]; ?></td>
+                    <td><?php echo $rows[1]; ?></td>
                      <td><?php echo $rows[3]; ?></td>
-                     <td><a href="Edit.php?edit=<?php echo $rows[0]; ?>"> Edit </a></td>
+                     <td><a href="edit.php?edit=<?php echo $rows[0]; ?>"> Edit </a></td>
 
-                    <td><a href="index.php?delete=<?php echo $rows[0]; ?>"> Delete </a></td>
+                    <td><a href="doctorview.php?delete=<?php echo $rows[0]; ?>"> Delete </a></td>
 
                      
                     
@@ -119,16 +119,13 @@ $result = mysqli_query($connection, $query);
 </html>
 <?php
 if (isset($_GET["delete"])) {
-    $userid = $_GET["delete"];
-    $sql = " DELETE FROM `users` where `id`='$userid'";
+    $patientid = $_GET["delete"];
+    $sql = " DELETE FROM `patients` where `id`='$patientid'";
     $result = mysqli_query($connection, $sql);
     if ($result) {
         echo "<script> alert('Deleted successfully')</script>";
-        echo "<script>location.replace('index.php');</script>";
+        echo "<script>location.replace('doctorview.php');</script>";
 
     }
 
 }
-
-
-?>
