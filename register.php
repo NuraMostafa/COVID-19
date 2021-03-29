@@ -68,7 +68,7 @@
       <br>
         <!-- <input type="file" accept="image/*" name="image" ><br><br> -->
         <div class="regerv_btn">
-        <button type="submit" name="submit"class="btn_2">Register</button>
+        <button type="submit" name="submit"class="btn_2">SignUp</button>
         </div>
         </div>
     </form>
