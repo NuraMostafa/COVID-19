@@ -29,10 +29,13 @@ if(isset($_POST['submit'])){
 
                 $_SESSION['userID'] = $userID;
                 $_SESSION['userEmail'] = $userEmail;
-                $_SESSION['userType'] = $userType;
+                $_SESSION['User_type'] = $userType;
                 $_SESSION['Username'] = $Username;
 
-              echo "<script>location.replace('test.php');</script>";
+                if(  $_SESSION['User_type'] == 'Patient'){
+                    echo "<script>location.replace('test.php');</script>";
+                }
+                
             }
         }
         else {
