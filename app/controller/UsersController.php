@@ -40,5 +40,29 @@ class UsersController extends Controller{
 	public function deleteUser($userID){
 		return $this->model->deleteUser($userID);
 	}
+
+		public function viewPatients(){
+		return $this->model->getpatients();
+	}
+
+	public function searchPatients($searchKey){
+		return $this->model->getSearchpatients($searchKey);
+	}
+		public function deletep(){
+		$this->model->deletePatient();
+	}
+
+	public function deletePatient($userID){
+		return $this->model->deletePatient($userID);
+	}
+
+		public function editp() {
+		$email = $_REQUEST['email'];
+		$userName = $_REQUEST['username'];
+		$gender = $_REQUEST['gender'];
+		$dateofbirth = $_REQUEST['dateofbirth'];
+
+		$this->model->editPatient($email,$userName,$gender, $dateofbirth);
+	}
 }
 ?>
