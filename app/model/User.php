@@ -26,6 +26,18 @@ class User extends Model {
       $this->gender = $gender;
       $this->dateofbirth = $dateofbirth;
     }
+  
+
+
+
+    if(""===$email){
+      $this->readPatient($id);
+    }else{
+      $this->email = $email;
+      $this->userName = $userName;
+      $this->gender = $gender;
+      $this->dateofbirth = $dateofbirth;
+    }
   }
 
   function getEmail() {
@@ -94,22 +106,18 @@ class User extends Model {
     }
     else {
         $this->email = "";
-		    $this->password="";
         $this->userName = "";
-        $this->userType = "";
         $this->gender = "";
         $this->dateofbirth = "";
     }
   }
   
-  function editUser($email="", $password="", $userName="", $userType="", $gender="", $dateofbirth=""){
+  function editUser($email="", $userName="", $gender="", $dateofbirth=""){
     $email = $_REQUEST['email'];
-		$password = $_REQUEST['password'];
 		$userName = $_REQUEST['username'];
-		$userType = $_REQUEST['user_type'];
 		$gender = $_REQUEST['gender'];
 		$dateofbirth = $_REQUEST['dateofbirth'];
-    $sql = "update users set email = '$email', password='$password', Username='$userName', User_type='$userType', gender='$gender', dateofbirth='$dateofbirth' where id=$this->id;";
+    $sql = "update patients set email = '$email', Username='$userName', gender='$gender', dateofbirth='$dateofbirth' where id=$this->id;";
     if($this->db->query($sql) === true){
       echo "updated successfully.";
       $this->readUser($this->id);
@@ -122,5 +130,44 @@ class User extends Model {
       echo "deleted successfully.";
     }
 	}
+ function readPatient($id){
+    $sql = "SELECT * FROM patients where id=".$id;
+    $db = $this->connect();
+    $result = $db->query($sql);
+    if ($result->num_rows == 1){
+        $row = $db->fetchRow();
+        $this->email = $row["email"];
+        $this->userName = $row["Username"];
+        $this->gender = $row["Gender"];
+        $this->dateofbirth = $row["dateofbirth"];
+    }
+    else {
+        $this->email = "";
+        $this->userName = "";
+        $this->gender = "";
+        $this->dateofbirth = "";
+    }
+  }
+  
+
+  function editPatient($email="", $userName="", $gender="", $dateofbirth=""){
+    $email = $_REQUEST['email'];
+    $userName = $_REQUEST['username'];
+    $gender = $_REQUEST['gender'];
+    $dateofbirth = $_REQUEST['dateofbirth'];
+    $sql = "update patients set email = '$email',Username='$userName', gender='$gender', dateofbirth='$dateofbirth' where id=$this->id;";
+    if($this->db->query($sql) === true){
+      echo "updated successfully.";
+      $this->readPatient($this->id);
+    }
+  }
+
+  function deletePatient(){
+    $sql="delete from patients where id=$this->id;";
+    if($this->db->query($sql) === true){
+      echo "deleted successfully.";
+    }
+  }
+
 	 
 }
