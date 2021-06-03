@@ -4,8 +4,10 @@ require_once(__ROOT__ . "model/User.php");
 
 class Users extends Model {
 	private $users;
+	private $patients;
 	function __construct() {
 		$this->fillArray();
+		$this->fillpatientsArray();
 	}
 
 	function fillArray() {
@@ -59,6 +61,56 @@ class Users extends Model {
 
 	function deleteUser($userID){
 		$sql = "DELETE FROM users WHERE id = '$userID'";
+		$result = $this->db->query($sql);
+		if($result){
+			return 'Successfully Deleted!';
+		}else{
+			return 'Failed to delete user!';
+		}
+	}
+
+
+
+	function fillpatientsArray() {
+		$this->patients = array();
+		$this->db = $this->connect();
+		$result = $this->readPatients();
+		while ($row = $result->fetch_assoc()) {
+			array_push($this->patients, new User($row["id"],$row["Username"],$row["email"],$row["Gender"],$row["dateofbirth"]));
+		}
+	}
+	function getpatients() {
+		return $this->patients;
+	}
+
+	function readPatients(){
+		$sql = "SELECT * FROM patients";
+
+		$result = $this->db->query($sql);
+		if ($result->num_rows > 0){
+			return $result;
+		}
+		else {
+			return false;
+		}
+	}
+
+
+		function getSearchpatients($searchKey1){
+		$searchResult = array();
+		$this->db = $this->connect();
+		$sql = "SELECT * FROM patients WHERE id LIKE '%$searchKey1%' OR Username LIKE '%$searchKey1%' OR Gender LIKE '%$searchKey1%'";
+		$result = $this->db->query($sql);
+		if ($result->num_rows > 0){
+			while ($row = $result->fetch_assoc()) {
+				array_push($searchResult, new User($row["id"],$row["Username"],$row["email"],$row["Gender"],$row["dateofbirth"]));
+			}
+		}
+		return $searchResult;
+	}
+
+		function deletePatient($patientID){
+		$sql = "DELETE FROM patients WHERE id = '$patientID'";
 		$result = $this->db->query($sql);
 		if($result){
 			return 'Successfully Deleted!';
