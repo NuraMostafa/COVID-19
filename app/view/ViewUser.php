@@ -148,5 +148,143 @@ class ViewUser extends View{
 		';
 		return $str;
 	}
+
+
+	public function viewPatients($PatientsArray){
+		$str='
+		<br><br>
+		<h1 >View Patients</h1>
+		<br>
+		<div class="form-group col-lg-12">
+			<form method="GET" action="">
+            <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey']) && !empty($_GET['searchKey'])) ? $_GET['searchKey'] : '') .'">  <button style="background-color: #008CBA;border: none;color: white;padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px;" type="submit">Search</button>
+            </form>
+			<br><br>
+			<div class="row" id="old">
+                <table>
+                  <tr style="background-color: #4169E1;">
+                    <th>ID</th>
+                    <th>Username</th> 
+                    <th>Gender</th> 
+                    <th>Edit</th> 
+                    <th>Delete</th> 
+                  </tr>';
+                  
+        	if (count($PatientsArray) > 0) {
+		        for($i = 0 ; $i < count($PatientsArray) ; $i ++) {
+			    	$str.='<tr>
+				            <td>'.$PatientsArray[$i]->getID().'</td>
+				            <td>'.$PatientsArray[$i]->getUserName().'</td>
+				            <td>'.$PatientsArray[$i]->getGender().'</td>
+				            <td><a href="editPatient.php?patientID='.$PatientsArray[$i]->getID().'"> Edit </a></td>
+				            <td><a href="doctor.php?action=deletePatient&patientID='.$PatientsArray[$i]->getID().'"> Delete </a></td>
+
+			            </tr>';                    
+	            }
+            } else {
+              $str.= "<p style='color:black;'>No data to view</p>";
+            }
+            $str.= '</table>
+					<br> <br>
+					<div class="regerv_btn">
+					<a href="adduser.php" class="btn_2">Add Patient</a>
+					</div>
+						</div>';
+        return $str;
+	}
+	public function editpForm(){
+		$str='<form action="profile.php?action=editaction" method="post">
+		<div>User Name:</div><div> <input type="text" name="username" value="'.$this->model->getUserName().'"/></div><br>
+		<div>Email:</div><div> <input type="text" name="email" value="'.$this->model->getEmail().'"/></div><br>
+		<div>Gender:</div><div> <input type="text" name="gender" value="'.$this->model->getGender().'"/></div><br>
+		<div>Date Of Birth: </div><div><input type="text" name="dateofbirth" value="'.$this->model->getDateOfBirth().'"/></div><br>
+		<div><input type="submit" /></div>';
+		return $str;
+	}
+
+
+	public function viewEditUPatientData($patientData){
+		$str = '
+			<div class="form-group col-md-6">
+			<form method="POST" action="" enctype="multipart/form-data" >
+			<h4 >Username</h4>
+				<input  class="x" name = "username" id="inputEmail4" placeholder="Username" value="'.$patientData->getUserName().'"><br>
+				<h4 >Email</h4>
+				<input type="email" class="x" placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail" value="'.$patientData->getEmail().'"><br>
+				<h4 >Select Gender</h4>
+			<select name="gender" class="x" id="Select">
+			<option disabled="">Select Gender</option>
+			';
+		if($patientData->getGender() == "Female"){
+			$str .= '<option selected>Female</option>
+					<option>Male</option>';
+		}
+		elseif($patientData->getGender() == "Male"){
+			$str .=	'<option selected>Male</option>
+					<option>Female</option>';
+		}
+		$str.= '</select required>
+				<br>
+				<h4 >Date of Birth</h4>
+				<input type="date" name= "dateofbirth" class="x" id="birthday" placeholder="Your Birthday" value="'.$patientData->getDateOfBirth().'">
+				<br>
+				<div class="regerv_btn">
+				<button type="submit" name="save2"class="btn_2">Update</button>
+				</div>
+				</div>
+			</form>
+		</div>
+		';
+		return $str;;
+	}
+
+
+	function testsform(){
+		$str=' <form method="POST" action="" enctype="multipart/form-data" >
+        <input style="color: black;" type="file" accept="img/*" name="image"><br><br>
+        <h4 >Email:</h4>
+        <input type="email" class="x" placeholder="Enter your email..." required name="email" onkeyup="filter(this)" id="email"><br>
+        <div class="input_wrapper">
+        <h4 >CRP:</h4>
+    <input type="number" class="x" placeholder="CRP" name="CPR" onkeyup="filter(this)" id="CPR" />
+    <div class="unit">mg/l</div>
+  </div>
+  <div class="input_wrapper">
+  <h4 >Ferritin:</h4>
+    <input type="number" class="x" placeholder="Ferritin" name="Ferritin" onkeyup="filter(this)" id="Ferritin" />
+    <div class="unit">ng/mL</div>
+  </div>
+  <div class="input_wrapper">
+  <h4 >LDH:</h4>
+    <input type="number" class="x" placeholder="LDH" name="LDH" onkeyup="filter(this)" id="LDH" />
+    <div class="unit">U/l</div>
+  </div>
+  <div class="input_wrapper">
+  <h4 >ALT:</h4>
+    <input type="number" class="x" placeholder="ALT" name="ALT" onkeyup="filter(this)" id="ALT" />
+    <div class="unit">U/l</div>
+  </div>
+  <div class="input_wrapper">
+  <h4 >CBC:</h4>
+    <input  type="number" class="x" placeholder="CBC" name="CBC" onkeyup="filter(this)" id="CBC" />
+    <div class="unit">g/dl</div>
+  </div>
+  <div class="input_wrapper">
+  <h4 >D-Dimer:</h4>
+    <input type="number" class="x" placeholder="D-Dimer" name="DDimer" onkeyup="filter(this)" id="DDimer" />
+    <div class="unit">µg FEU/mL</div>
+  </div>
+  <div class="input_wrapper">
+  <h4 >AST:</h4>
+    <input type="number" class="x" placeholder="AST" name="AST" onkeyup="filter(this)" id="AST" />
+    <div class="unit">U/l</div>
+  </div>
+        <div class="regerv_btn"><button type="submit" name="submit"class="btn_2">Add Test</button></div><br><br>
+
+    </form>';
+		return $str;
+	}
+
+
 }
 ?>
