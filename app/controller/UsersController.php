@@ -24,6 +24,26 @@ class UsersController extends Controller{
 
 		$this->model->insertUser($email,$password,$userName,$userType, $gender, $dateofbirth);
 	}
+	public function addPatient() {
+		$userName = $_REQUEST['username'];
+		$email = $_REQUEST['email'];
+		$gender = $_REQUEST['gender'];
+		$dateofbirth = $_REQUEST['dateofbirth'];
+
+		$this->model->insertPatient( $userName, $email, $gender, $dateofbirth);
+	}
+	public function addTest() {
+		 $CPR = $_POST['CPR'];
+         $Ferritin = $_POST['Ferritin'];
+         $LDH = $_POST['LDH'];
+         $ALT = $_POST['ALT'];
+         $CBC = $_POST['CBC'];
+         $DDimer = $_POST['DDimer'];
+         $AST = $_POST['AST'];
+         $email = $_POST['email'];
+
+		$this->model->insertTestData( $CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST, $email);
+	}
 
 	public function edit() {
 		$email = $_REQUEST['email'];
