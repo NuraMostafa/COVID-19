@@ -29,6 +29,9 @@ if(isset($_POST['login']))	{
     }else if($_SESSION["userType"] == "Doctor"){
       header("Location: doctor.php");
     }
+     else if($_SESSION["userType"] == "Patient"){
+      header("Location: patient.php");
+    }
 	}
 }
 ?>
