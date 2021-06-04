@@ -45,6 +45,28 @@ class Users extends Model {
 			echo "ERROR: Could not able to execute $sql. " . $conn->error;
 		}
 	}
+	function insertPatient( $userName, $email, $gender, $dateofbirth){
+		$sql = "INSERT INTO patients ( Username, email, Gender, dateofbirth) VALUES ('$userName', '$email', '$gender', '$dateofbirth')";
+		if($this->db->query($sql) === true){
+			echo "Records inserted successfully.";
+			$this->fillArray();
+		} 
+		else{
+			echo "ERROR: Could not able to execute $sql. " . $conn->error;
+		}
+	}
+
+	
+		function insertTestData( $CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST, $email){
+		$sql = "INSERT INTO tests ( CPR, Ferritin, LDH, ALT, CBC, DDimer, AST, email) VALUES ('$CPR', '$Ferritin', '$LDH', '$ALT', '$CBC', '$DDimer', '$AST', '$email')";
+		if($this->db->query($sql) === true){
+			echo "Records inserted successfully.";
+			$this->fillArray();
+		} 
+		else{
+			echo "ERROR: Could not able to execute $sql. " . $conn->error;
+		}
+	}
 
 	function getSearchUsers($searchKey){
 		$searchResult = array();
