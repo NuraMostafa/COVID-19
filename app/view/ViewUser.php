@@ -268,9 +268,10 @@ class ViewUser extends View{
 	}
 
 
+	
 	function testsform(){
-		$str=' <form method="POST" action="" enctype="multipart/form-data" >
-        <input style="color: black;" type="file" accept="img/*" name="image"><br><br>
+		$str=' <form method="POST" action="tests.php?action=addTest" enctype="multipart/form-data" >
+        
         <h4 >Email:</h4>
         <input type="email" class="x" placeholder="Enter your email..." required name="email" onkeyup="filter(this)" id="email"><br>
         <div class="input_wrapper">
@@ -313,7 +314,30 @@ class ViewUser extends View{
     </form>';
 		return $str;
 	}
+			public function addPatientData(){
+		$str ='<form method="POST" action="addPatient.php?action=addPatient" enctype="multipart/form-data" >
+			    <h4 >Username</h4>
+		        <input class="x" name="username" id="inputEmail4" placeholder="Username"><br>
+		        <h4 >Email</h4>
+		        <input type="email" class="x" placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail"><br>
+		        <h4 >Select Gender</h4>
+		        <select name="gender" class="x" id="Select">
+			        <option selected>Select Gender</option>
+			        <option >Male</option>
+			        <option >Female</option>
+		        </select required>
+			    <br>
+			    <h4 >Date of Birth</h4>
+			    <input type="date" name= "dateofbirth" class="x" id="birthday" placeholder="Your Birthday">
+				<br>
+		        <div class="regerv_btn">
+		        	<button  type="submit" name="submit"class="btn_2">Submit</button>
+		        </div>
+			</form>';
+		return $str;
 
+
+}
 
 }
 ?>
