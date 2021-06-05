@@ -124,10 +124,10 @@ class Users extends Model {
 	}
 
 
-		function getSearchpatients($searchKey1){
+		function getSearchpatients($searchKey){
 		$searchResult = array();
 		$this->db = $this->connect();
-		$sql = "SELECT * FROM patients WHERE id LIKE '%$searchKey1%' OR Username LIKE '%$searchKey1%' OR Gender LIKE '%$searchKey1%'";
+		$sql = "SELECT * FROM patients WHERE id LIKE '%$searchKey%' OR Username LIKE '%$searchKey%' OR Gender LIKE '%$searchKey%'";
 		$result = $this->db->query($sql);
 		if ($result->num_rows > 0){
 			while ($row = $result->fetch_assoc()) {
