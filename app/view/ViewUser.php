@@ -69,6 +69,7 @@ class ViewUser extends View{
 		<div><input type="submit" /></div>';
 		return $str;
 	}
+	
 
 	public function viewUsers($usersArray){
 		$str='
@@ -147,7 +148,8 @@ class ViewUser extends View{
 			</form>
 		</div>
 		';
-		return $str;
+		return $str;;
+	
 	}
 		public function addUserData(){
 		$str ='<form method="POST" action="adduser.php?action=addUser" enctype="multipart/form-data" >
@@ -221,6 +223,50 @@ class ViewUser extends View{
 						</div>';
         return $str;
 	}
+
+
+	public function viewProfile($userData){
+		$str='
+		<br><br>
+		<h1 >Profile</h1>
+		<br>
+		<div class="form-group col-lg-12">
+			<form method="GET" action="">
+			<div class="row" id="old">
+                <table>
+					<tr>
+						<td>ID</td>
+						<td>'.$userData->getID().'</td>
+					</tr>
+					<tr>
+						<td>User Name</td>
+						<td>'.$userData->getUserName().'</td>
+					</tr>
+					<tr>
+						<td>Email</td>
+						<td>'.$userData->getEmail().'</td>
+					</tr>
+					<tr>
+						<td>Gender</td>
+						<td>'.$userData->getGender().'</td>
+					</tr>
+					<tr>
+						<td>Date Of Birth</td>
+						<td>'.$userData->getDateOfBirth().'</td>
+					</tr>
+					<tr>
+				            <td><a href="editPatientaccount.php?userID='.$userData->getID().'"> Edit </a></td>
+				            <td><a href="profile.php?action=deleteUser&userID='.$userData->getID().'"> Delete </a></td>
+			            </tr>    
+
+
+	            </table>
+			<br> <br>
+		</div>';
+        return $str;	
+	}
+
+
 	public function editpForm(){
 		$str='<form action="profile.php?action=editaction" method="post">
 		<div>User Name:</div><div> <input type="text" name="username" value="'.$this->model->getUserName().'"/></div><br>
@@ -339,61 +385,6 @@ class ViewUser extends View{
 
 }
 
-public function viewPatient($testsArray){
-		$str='
-		<br><br>
-		<h1 >View Tests</h1>
-		<br>
-		<div class="form-group col-lg-12">
-			<form method="GET" action="">
-            <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey']) && !empty($_GET['searchKey'])) ? $_GET['searchKey'] : '') .'">  <button style="background-color: #008CBA;border: none;color: white;padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px;" type="submit">Search</button>
-            </form>
-			<br><br>
-			<div class="row" id="old">
-                <table>
-                  <tr style="background-color: #4169E1;">
-                    <th>ID</th>
-                    <th>Username</th> 
-                    <th>Gender</th> 
-                    <th>Date of birth</th> 
-                    <th>password</th>
-                    <th>Edit</th> 
-                    <th>Delete</th> 
-
-                  </tr>';
-                  
-        	if (count($testsArray) > 0) {
-		        for($i = 0 ; $i < count($testsArray) ; $i ++) {
-			    	$str.='<tr>
-				            <td>'.$testsArray[$i]->getID().'</td>
-				            <td>'.$testsArray[$i]->getUserName().'</td>
-				            <td>'.$testsArray[$i]->getGender().'</td>
-				            <td>'.$testsArray[$i]->getDateOfBirth().'</td>
-				            <td>'.$testsArray[$i]->getPassword().'</td>
-
-				            <td><a href="editPatientaccount.php?userID='.$testsArray[$i]->getID().'"> Edit </a></td>
-				            <td><a href="profile.php?action=delete&userID='.$testsArray[$i]->getID().'"> Delete </a></td>
-
-			            </tr>';                    
-	            }
-            } else {
-              $str.= "<p style='color:black;'>No data to view</p>";
-            }
-            $str.= '</table>
-					<br> <br>
-					<div class="regerv_btn">
-					<a href="tests.php" class="btn_2" >Add Tests</a>
-					</div>
-						</div>';
-        return $str;
-	}
-
-
-
 }
-
-
-
-
 ?>
 
