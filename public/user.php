@@ -30,7 +30,7 @@ if(isset($_POST['login']))	{
       header("Location: doctor.php");
     }
      else if($_SESSION["userType"] == "Patient"){
-      header("Location: patient.php");
+      header("Location: profile.php");
     }
 	}
 }
