@@ -196,7 +196,9 @@ class ViewUser extends View{
                   <tr style="background-color: #4169E1;">
                     <th>ID</th>
                     <th>Username</th> 
+                    <th>Email</th> 
                     <th>Gender</th> 
+                    <th>Date of birth</th>                     
                     <th>Edit</th> 
                     <th>Delete</th> 
                   </tr>';
@@ -204,9 +206,11 @@ class ViewUser extends View{
         	if (count($PatientsArray) > 0) {
 		        for($i = 0 ; $i < count($PatientsArray) ; $i ++) {
 			    	$str.='<tr>
+			    			<td>'.$PatientsArray[$i]->getUserName().'</td>
 				            <td>'.$PatientsArray[$i]->getID().'</td>
-				            <td>'.$PatientsArray[$i]->getUserName().'</td>
-				            <td>'.$PatientsArray[$i]->getGender().'</td>
+				            <td>'.$PatientsArray[$i]->getEmail().'</td>
+				           	<td>'.$PatientsArray[$i]->getGender().'</td>
+				           	<td>'.$PatientsArray[$i]->getDateOfBirth().'</td>
 				            <td><a href="editPatient.php?patientID='.$PatientsArray[$i]->getID().'"> Edit </a></td>
 				            <td><a href="doctor.php?action=deletePatient&patientID='.$PatientsArray[$i]->getID().'"> Delete </a></td>
 
