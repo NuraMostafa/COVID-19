@@ -339,6 +339,61 @@ class ViewUser extends View{
 
 }
 
+public function viewPatient($testsArray){
+		$str='
+		<br><br>
+		<h1 >View Tests</h1>
+		<br>
+		<div class="form-group col-lg-12">
+			<form method="GET" action="">
+            <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey']) && !empty($_GET['searchKey'])) ? $_GET['searchKey'] : '') .'">  <button style="background-color: #008CBA;border: none;color: white;padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px;" type="submit">Search</button>
+            </form>
+			<br><br>
+			<div class="row" id="old">
+                <table>
+                  <tr style="background-color: #4169E1;">
+                    <th>ID</th>
+                    <th>Username</th> 
+                    <th>Gender</th> 
+                    <th>Date of birth</th> 
+                    <th>password</th>
+                    <th>Edit</th> 
+                    <th>Delete</th> 
+
+                  </tr>';
+                  
+        	if (count($testsArray) > 0) {
+		        for($i = 0 ; $i < count($testsArray) ; $i ++) {
+			    	$str.='<tr>
+				            <td>'.$testsArray[$i]->getID().'</td>
+				            <td>'.$testsArray[$i]->getUserName().'</td>
+				            <td>'.$testsArray[$i]->getGender().'</td>
+				            <td>'.$testsArray[$i]->getDateOfBirth().'</td>
+				            <td>'.$testsArray[$i]->getPassword().'</td>
+
+				            <td><a href="editPatientaccount.php?userID='.$testsArray[$i]->getID().'"> Edit </a></td>
+				            <td><a href="profile.php?action=delete&userID='.$testsArray[$i]->getID().'"> Delete </a></td>
+
+			            </tr>';                    
+	            }
+            } else {
+              $str.= "<p style='color:black;'>No data to view</p>";
+            }
+            $str.= '</table>
+					<br> <br>
+					<div class="regerv_btn">
+					<a href="tests.php" class="btn_2" >Add Tests</a>
+					</div>
+						</div>';
+        return $str;
+	}
+
+
+
 }
+
+
+
+
 ?>
 
