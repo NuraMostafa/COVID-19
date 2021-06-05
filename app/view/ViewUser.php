@@ -189,8 +189,8 @@ class ViewUser extends View{
 		<br>
 		<div class="form-group col-lg-12">
 			<form method="GET" action="">
-            <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey1']) && !empty($_GET['searchKey1'])) ? $_GET['searchKey1'] : '') .'">  <button style="background-color: #008CBA;border: none;color: white;padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px;" type="submit">Search</button>
-            </form>
+            <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey']) && !empty($_GET['searchKey'])) ? $_GET['searchKey'] : '') .'">  <button style="background-color: #008CBA;border: none;color: white;padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px;" type="submit">Search</button>
+            </form>>
 			<br><br>
 			<div class="row" id="old">
                 <table>
