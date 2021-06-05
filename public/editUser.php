@@ -71,10 +71,10 @@ if(isset($_POST['save'])){
           
             <?php echo  $editPageData; ?>
             
-  			</div>
-  		</div>
-	  </div>
-	</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </section>
 <script src="assets/js/jquery-3.4.1.min.js"></script>
