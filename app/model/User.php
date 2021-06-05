@@ -16,14 +16,14 @@ class User extends Model {
     $this->id = $id;
 	    $this->db = $this->connect();
 
-    if(""===$email && $_SESSION['userType'] != 'Doctor'){
+    if(""===$email && $_SESSION['userType'] = 'Admin'){
       $this->readUser($id);
     }
   
 
    
 
-    if(""===$email && $_SESSION['userType'] != 'Admin'){
+    if(""===$email && $_SESSION['userType'] = 'Doctor'){
       $this->readPatient($id);
     }
 
