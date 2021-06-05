@@ -14,7 +14,10 @@ $testsPageData = '';
 if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 'Patient'){
   header('Location: index.php');
 }
-
+if(isset($_POST['login'])){
+  $testsArray = new User($_GET['userID']);
+  $testsArray->readUser();
+ header("Location: profile.php");
 if (isset($_GET['action']) && !empty($_GET['action'])) {
   if($_GET['action'] == 'deleteUser' && isset($_GET['userID']) && !empty($_GET['userID'])){
     echo '<script>alert("'.$controller->deleteUser($_GET['userID']).'");</script>';
@@ -23,7 +26,7 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 }else{
   $testsPageData = $controller->viewUsers();
   $testsPageData = $view->viewPatient($testsPageData);
-}
+}}
 ?>
 
 <!doctype html>
