@@ -28,18 +28,8 @@ class User extends Model {
     }
   
 
-    /*  SABAB EL ERROR YA HANEM
-
-    if(""===$email){
-      $this->readPatient($id);
-    }else{
-      $this->email = $email;
-      $this->userName = $userName;
-      $this->gender = $gender;
-      $this->dateofbirth = $dateofbirth;
-    }
-
-    */
+  
+    
   }
 
   function getEmail() {
