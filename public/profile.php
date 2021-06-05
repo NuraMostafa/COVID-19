@@ -8,25 +8,22 @@ require_once(__ROOT__ . "view/ViewUser.php");
 $model = new Users();
 $controller = new UsersController($model);
 $view = new ViewUser($controller, $model);
-$testsArray = array();
-$testsPageData = '';
+$userData = array();
+$profilePageData = '';
 
 if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 'Patient'){
   header('Location: index.php');
 }
-if(isset($_POST['login'])){
-  $testsArray = new User($_GET['userID']);
-  $testsArray->readUser();
- header("Location: profile.php");
+
 if (isset($_GET['action']) && !empty($_GET['action'])) {
   if($_GET['action'] == 'deleteUser' && isset($_GET['userID']) && !empty($_GET['userID'])){
     echo '<script>alert("'.$controller->deleteUser($_GET['userID']).'");</script>';
     header("Location: profile.php");
   }
 }else{
-  $testsPageData = $controller->viewUsers();
-  $testsPageData = $view->viewPatient($testsPageData);
-}}
+  $userData = new User($_SESSION["id"]);
+  $profilePageData = $view->viewProfile($userData);
+}
 ?>
 
 <!doctype html>
@@ -71,7 +68,7 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
     <div class="col-lg">
       <div class="regervation_part_iner" style="display: inline-block;">
         <div class="form-row">   
-            <?php echo  $testsPageData; ?>     
+            <?php echo  $profilePageData; ?>     
   			</div>
   		</div>
 	  </div>
