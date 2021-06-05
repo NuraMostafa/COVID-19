@@ -150,17 +150,6 @@ class User extends Model {
   }
   
 
-  function editPatient($email="", $userName="", $gender="", $dateofbirth=""){
-    $email = $_REQUEST['email'];
-    $userName = $_REQUEST['username'];
-    $gender = $_REQUEST['gender'];
-    $dateofbirth = $_REQUEST['dateofbirth'];
-    $sql = "update patients set email = '$email',Username='$userName', gender='$gender', dateofbirth='$dateofbirth' where id=$this->id;";
-    if($this->db->query($sql) === true){
-      echo "updated successfully.";
-      $this->readPatient($this->id);
-    }
-  }
 
   function deletePatient(){
     $sql="delete from patients where id=$this->id;";
@@ -169,5 +158,9 @@ class User extends Model {
     }
   }
 
-	 
+
+
+
+
+ 
 }
