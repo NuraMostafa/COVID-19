@@ -95,6 +95,26 @@ class UsersController extends Controller{
 
 		$this->model->editPatient($email,$userName,$gender, $dateofbirth);
 	}
+
+
+
+	public function viewPatient(){
+		return $this->model->getPatient();
+	}
+
+		public function editp() {
+		$email = $_REQUEST['email'];
+		$userName = $_REQUEST['username'];
+		$gender = $_REQUEST['gender'];
+		$dateofbirth = $_REQUEST['dateofbirth'];
+
+		$this->model->editPatient($email,$userName,$gender, $dateofbirth);
+	}
+
+
+
+	
+	
 }
 ?>
 
