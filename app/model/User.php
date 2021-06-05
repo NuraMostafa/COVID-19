@@ -18,6 +18,13 @@ class User extends Model {
 
     if(""===$email && $_SESSION['userType'] = 'Admin'){
       $this->readUser($id);
+    }else{
+      $this->email = $email;
+	    $this->password=$password;
+      $this->userName = $userName;
+      $this->userType = $userType;
+      $this->gender = $gender;
+      $this->dateofbirth = $dateofbirth;
     }
   
 
