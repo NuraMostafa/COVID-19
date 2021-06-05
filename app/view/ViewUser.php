@@ -77,6 +77,7 @@ class ViewUser extends View{
 		<h1 >View Users</h1>
 		<br>
 		<div class="form-group col-lg-12">
+					<div class="form-group col-lg-12">
 			<form method="GET" action="">
             <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey']) && !empty($_GET['searchKey'])) ? $_GET['searchKey'] : '') .'">  <button style="background-color: #008CBA;border: none;color: white;padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px;" type="submit">Search</button>
             </form>
@@ -188,7 +189,7 @@ class ViewUser extends View{
 		<br>
 		<div class="form-group col-lg-12">
 			<form method="GET" action="">
-            <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey']) && !empty($_GET['searchKey'])) ? $_GET['searchKey'] : '') .'">  <button style="background-color: #008CBA;border: none;color: white;padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px;" type="submit">Search</button>
+            <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey1']) && !empty($_GET['searchKey1'])) ? $_GET['searchKey1'] : '') .'">  <button style="background-color: #008CBA;border: none;color: white;padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px;" type="submit">Search</button>
             </form>
 			<br><br>
 			<div class="row" id="old">
@@ -206,8 +207,8 @@ class ViewUser extends View{
         	if (count($PatientsArray) > 0) {
 		        for($i = 0 ; $i < count($PatientsArray) ; $i ++) {
 			    	$str.='<tr>
-			    			<td>'.$PatientsArray[$i]->getUserName().'</td>
 				            <td>'.$PatientsArray[$i]->getID().'</td>
+				            <td>'.$PatientsArray[$i]->getUserName().'</td>
 				            <td>'.$PatientsArray[$i]->getEmail().'</td>
 				           	<td>'.$PatientsArray[$i]->getGender().'</td>
 				           	<td>'.$PatientsArray[$i]->getDateOfBirth().'</td>
