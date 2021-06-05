@@ -218,7 +218,7 @@ class ViewUser extends View{
             $str.= '</table>
 					<br> <br>
 					<div class="regerv_btn">
-					<a href="adduser.php" class="btn_2">Add Patient</a>
+					<a href="addPatient.php" class="btn_2">Add Patient</a>
 					</div>
 						</div>';
         return $str;
