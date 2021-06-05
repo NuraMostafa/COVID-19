@@ -74,10 +74,10 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
           
             <?php echo  $adminPageData; ?>
             
-  			</div>
-  		</div>
-	  </div>
-	</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </section>
 <script src="assets/js/jquery-3.4.1.min.js"></script>
