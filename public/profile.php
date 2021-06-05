@@ -20,9 +20,6 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
     echo '<script>alert("'.$controller->deleteUser($_GET['userID']).'");</script>';
     header("Location: profile.php");
   }
-}else if(isset($_GET['searchKey']) && !empty($_GET['searchKey'])){
-  $testsPageData = $controller->searchUsers($_GET['searchKey']);
-  $adminPageData = $view->viewPatient($testsPageData);
 }else{
   $testsPageData = $controller->viewUsers();
   $testsPageData = $view->viewPatient($testsPageData);
@@ -36,7 +33,7 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Ptofile</title>
+    <title>My Profile</title>
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
