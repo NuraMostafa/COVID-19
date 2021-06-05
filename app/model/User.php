@@ -16,21 +16,18 @@ class User extends Model {
     $this->id = $id;
 	    $this->db = $this->connect();
 
-    if(""===$email){
+    if(""===$email && $_SESSION['userType'] != 'Doctor'){
       $this->readUser($id);
-    }else{
-      $this->email = $email;
-	    $this->password=$password;
-      $this->userName = $userName;
-      $this->userType = $userType;
-      $this->gender = $gender;
-      $this->dateofbirth = $dateofbirth;
     }
   
 
-  
-    
-  }
+   
+
+    if(""===$email && $_SESSION['userType'] != 'Admin'){
+      $this->readPatient($id);
+    }
+
+      }
 
   function getEmail() {
     return $this->email;
