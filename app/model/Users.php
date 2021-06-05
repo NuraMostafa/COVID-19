@@ -5,6 +5,8 @@ require_once(__ROOT__ . "model/User.php");
 class Users extends Model {
 	private $users;
 	private $patients;
+	private $patient;
+
 	function __construct() {
 		$this->fillArray();
 		$this->fillpatientsArray();
@@ -20,6 +22,10 @@ class Users extends Model {
 	}
 
 	function getUsers() {
+		return $this->users;
+	}
+
+		function getPatient() {
 		return $this->users;
 	}
 
@@ -140,4 +146,7 @@ class Users extends Model {
 			return 'Failed to delete user!';
 		}
 	}
+
+
+
 }
