@@ -175,5 +175,6 @@ results=model.fit(train_images, train_labels, epochs=6)
 
 results1 = model.evaluate(test_images,test_labels, batch_size=100)
 
+model.save("my_model")
 
 
