@@ -44,12 +44,13 @@
 <div class="col-lg-5 col-xl-5">
 <div class="banner_text">
 <div class="banner_text_iner">
-<h5>We are here for your care</h5>
+<h5>We care about your health</h5>
 <h1>Best Care &
 Better Doctor</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing
-elit sed do eiusmod tempor incididunt ut labore et dolore
-magna aliqua. Quis ipsum suspendisse ultrices gravida.Risus cmodo viverra </p>
+<p> COVID-19 is an infectious disease that mainly affects lungs. 
+Pneumonia is also an infection that causes inflammation in the air sacs in lungs.
+ COVID-19 and pneumonia have similar symptoms in lungs as breathing problems that appear
+  in CT scan image as ground-glass opacity (GGO).</p>
 <a href="#" class="btn_2">Upload your Tests</a>
 </div>
 </div>
@@ -75,11 +76,11 @@ magna aliqua. Quis ipsum suspendisse ultrices gravida.Risus cmodo viverra </p>
 <div class="col-md-6 col-lg-5">
 <div class="about_us_text">
 <h2>About us</h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed
-do eiusmod tempor incididunt ut labore et dolore magna aliqua
-Quis ipsum suspendisse ultrices gravida. Risus cmodo viverra
-maecenas accumsan lacus vel</p>
-<a class="btn_2 " href="#">learn more</a>
+<p> COVID-19 and pneumonia have similar symptoms in lungs as breathing problems that appear
+  in CT scan image as ground-glass opacity (GGO). Through this system, anyone can upload his/her CT scan image to know 
+  if he/she suffer from COVID-19 or Pneumonia. Also, anyone can insert his/her blood test result to know if he/she 
+  suffer from COVID-19.</p>
+<a class="btn_2 " href='index.php'>learn more</a>
  <div class="banner_item">
 <div class="single_item">
 <img src="assets/img/icon/banner_1.svg" alt="">
@@ -112,20 +113,13 @@ maecenas accumsan lacus vel</p>
 </div>
 <div class="row justify-content-between align-items-center">
 <div class="col-lg-3 col-sm-12">
- <div class="single_feature">
-<div class="single_feature_part">
-<span class="single_feature_icon"><img src="assets/img/icon/feature_1.svg" alt=""></span>
-<h4>Better Future</h4>
-<p>Darkness multiply rule Which from without life creature blessed
-give moveth moveth seas make day which divided our have.</p>
-</div>
-</div>
+
 <div class="single_feature">
 <div class="single_feature_part">
 <span class="single_feature_icon"><img src="assets/img/icon/feature_2.svg" alt=""></span>
 <h4>Better Future</h4>
-<p>Darkness multiply rule Which from without life creature blessed
-give moveth moveth seas make day which divided our have.</p>
+<p>Only by uploading your CT scan image, you can know if you suffer from 
+COVID-19 disease or Pneumonia. You can also know the severity of the disease.</p>
 </div>
 </div>
 </div>
@@ -137,20 +131,13 @@ give moveth moveth seas make day which divided our have.</p>
 <div class="col-lg-3 col-sm-12">
 <div class="single_feature">
 <div class="single_feature_part">
-<span class="single_feature_icon"><img src="assets/img/icon/feature_1.svg" alt=""></span>
-<h4>Better Future</h4>
-<p>Darkness multiply rule Which from without life creature blessed
-give moveth moveth seas make day which divided our have.</p>
-</div>
-</div>
-<div class="single_feature">
-<div class="single_feature_part">
 <span class="single_feature_icon"><img src="assets/img/icon/feature_2.svg" alt=""></span>
 <h4>Better Future</h4>
-<p>Darkness multiply rule Which from without life creature blessed
-give moveth moveth seas make day which divided our have.</p>
+<p>By Uploading blood test results, you can know if you suffer from COVID-19 or not. Also, you can know the severity
+of the disease.</p>
 </div>
 </div>
+
 </div>
 </div>
 </div>
