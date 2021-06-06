@@ -20,7 +20,7 @@ class User extends Model {
       $this->readUser($id);
     }else{
       $this->email = $email;
-	    $this->password=$password;
+      $this->password=$password;
       $this->userName = $userName;
       $this->userType = $userType;
       $this->gender = $gender;
@@ -35,6 +35,7 @@ class User extends Model {
     }
 
       }
+
 
   function getEmail() {
     return $this->email;
