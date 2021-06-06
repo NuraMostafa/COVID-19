@@ -20,14 +20,10 @@ class ViewUser extends View{
 		
 	function loginForm(){
 		$str='<form method="POST" action="user.php" enctype="multipart/form-data" >
-			         <div class= "input-container">
-			    <i class="fa fa-envelope icon"></i>
-			        <input type="email" class="input"  placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail"><br>
-			        </div>
-			         <div class= "input-container">
-		         <i class="fa fa-key icon"></i>
-			        <input type="password" class="input" placeholder="Enter your password" required name="password" onkeyup="filter(this)" id="registerpassword"><br>
-			        </div>
+			        <h4 >Email</h4>
+			        <input type="email" class="x" placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail"><br>
+			        <h4 >Password</h4>
+			        <input type="password" class="x" placeholder="Enter your password" required name="password" onkeyup="filter(this)" id="registerpassword"><br>
 			        <div class="regerv_btn">
 			        <button type="submit" name="login"class="btn_2">Login</button>
 			        </div>
@@ -38,41 +34,31 @@ class ViewUser extends View{
 
 	function signupForm(){
 		$str='<form method="POST" action="user.php?action=insert" enctype="multipart/form-data" >
-		       <div class= "input-container">
-			    <i class="fa fa-user icon"></i>
-		        <input  class="input" name="username" id="inputEmail4" placeholder="Username"><br>
-		        </div>
-		        <div class= "input-container">
-		         <i class="fa fa-envelope icon"></i>
-		        <input type="email" class="input" placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail"><br>
-
-		      </div>
-		      <div class= "input-container">
-		         <i class="fa fa-key icon"></i>
-		        <input type="password" class="input" placeholder="Enter your password" required name="password" onkeyup="filter(this)" registerpassword"><br>
-		        </div>
-		         <div class= "input-container">
-		         <i class="fa fa-key icon"></i>
-		        <input type="password" class="input" id="inputEmail4" placeholder="Confirm Password" required name="Confirmpassword" onkeyup="filter(this)" id="registerconfirmpassword"><br>
-		       </div>
-		       <div class= "input-container">
-		         <i class="fa fa-transgender icon"></i>
-		        <select name="gender" class="input" id="Select">
+			    <h4 >Username</h4>
+		        <input  class="x" name="username" id="inputEmail4" placeholder="Username"><br>
+		        <h4 >Email</h4>
+		        <input type="email" class="x" placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail"><br>
+		        <h4 >Password</h4>
+		        <input type="password" class="x" placeholder="Enter your password" required name="password" onkeyup="filter(this)" registerpassword"><br>
+		        <h4 >Confirm Password</h4>
+		        <input type="password" class="x" id="inputEmail4" placeholder="Confirm Password" required name="Confirmpassword" onkeyup="filter(this)" id="registerconfirmpassword"><br>
+		        <h4 >Select Gender</h4>
+		        <select name="gender" class="x" id="Select">
 			        <option selected>Select Gender</option>
 			        <option >Male</option>
 			        <option >Female</option>
 		        </select required>
-			    </div>
-			     <div class= "input-container">
-		         <i class="fa fa-calendar icon"></i>
-			    <input type="date" name= "dateofbirth" class="input" id="birthday" placeholder="Your Birthday">
-				</div>
+			    <br>
+			    <h4 >Date of Birth</h4>
+			    <input type="date" name= "dateofbirth" class="x" id="birthday" placeholder="Your Birthday">
+				<br>
 		        <div class="regerv_btn">
 		        	<button type="submit" name="submit"class="btn_2">SignUp</button>
 		        </div>
 			</form>';
 		return $str;
 	}
+
 	public function editForm(){
 		$str='<form action="profile.php?action=editaction" method="post">
 		<div>Email:</div><div> <input type="text" name="email" value="'.$this->model->getEmail().'"/></div><br>
@@ -268,10 +254,10 @@ class ViewUser extends View{
 						<td>Date Of Birth</td>
 						<td>'.$userData->getDateOfBirth().'</td>
 					</tr>
-					<tr>
-				            <td><a href="editPatientaccount.php?userID='.$userData->getID().'"> Edit </a></td>
+						<tr>
+				            <td><a href="edituser.php?userID='.$userData->getID().'"> Edit </a></td>
 				            <td><a href="profile.php?action=deleteUser&userID='.$userData->getID().'"> Delete </a></td>
-			            </tr>  
+			            </tr> 
 	            </table>
 			<br> <br>
 		</div>';
@@ -291,8 +277,8 @@ class ViewUser extends View{
 
 
 	public function viewEditUPatientData($patientData){
-		$str = '
-			<div class="form-group col-md-6">
+			$str = '
+		<div class="form-group col-md-6">
 			<form method="POST" action="" enctype="multipart/form-data" >
 			<h4 >Username</h4>
 				<input  class="x" name = "username" id="inputEmail4" placeholder="Username" value="'.$patientData->getUserName().'"><br>
