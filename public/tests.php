@@ -16,10 +16,13 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 'Patient'){
   header('Location: index.php');
 }
-
-
+if(isset($_POST['submit'])){
+   $command = escapeshellcmd('');
+    $output1 = shell_exec($command);
+    echo $output1;
+}
 ?>
-
+?>
 <!doctype html>
 <html lang="en">
 <head>
