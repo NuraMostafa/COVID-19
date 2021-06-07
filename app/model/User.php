@@ -14,29 +14,22 @@ class User extends Model {
 
   function __construct($id, $email = "", $password="", $userName="", $userType="",$gender="",$dateofbirth="") {
     $this->id = $id;
-	    $this->db = $this->connect();
+	  $this->db = $this->connect();
 
-    if(""===$email && $_SESSION['userType'] = 'Admin'){
+    if(empty($email) && ($_SESSION['userType'] =='Admin' || $_SESSION['userType'] == 'Patient')){
       $this->readUser($id);
-    }else{
+    } elseif(empty($email) && $_SESSION['userType'] == 'Doctor'){
+      $this->readPatient($id);
+    } else {
       $this->email = $email;
-      $this->password=$password;
+      $this->password = $password;
       $this->userName = $userName;
       $this->userType = $userType;
       $this->gender = $gender;
       $this->dateofbirth = $dateofbirth;
     }
+  }
   
-
-   
-
-    if(""===$email && $_SESSION['userType'] = 'Doctor'){
-      $this->readPatient($id);
-    }
-
-      }
-
-
   function getEmail() {
     return $this->email;
   }
@@ -137,13 +130,17 @@ class User extends Model {
     if ($result->num_rows == 1){
         $row = $db->fetchRow();
         $this->email = $row["email"];
+        $this->password = '';
         $this->userName = $row["Username"];
+        $this->userType = "";
         $this->gender = $row["Gender"];
         $this->dateofbirth = $row["dateofbirth"];
     }
     else {
         $this->email = "";
+        $this->password = "";
         $this->userName = "";
+        $this->userType = "";
         $this->gender = "";
         $this->dateofbirth = "";
     }
