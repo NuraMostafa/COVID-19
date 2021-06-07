@@ -104,7 +104,7 @@ class Users extends Model {
 		$this->db = $this->connect();
 		$result = $this->readPatients();
 		while ($row = $result->fetch_assoc()) {
-			array_push($this->patients, new User($row["id"],$row["Username"],$row["email"],$row["Gender"],$row["dateofbirth"]));
+			array_push($this->patients, new User($row["id"],$row["email"],'$row["Password"]',$row["Username"],'$row["User_type"]',$row["Gender"],$row["dateofbirth"]));
 		}
 	}
 	function getpatients() {
