@@ -11,10 +11,6 @@ $view = new ViewUser($controller, $model);
 $userData = array();
 $editPageData = '';
 
-if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 'Admin'){
-  header('Location: index.php');
-}
-
 if(isset($_POST['save'])){
     $userData = new User($_GET['userID']);
     $userData->editUser();
