@@ -1,171 +1,152 @@
 <?php
-  require_once(__ROOT__ . "model/Model.php");
-?>
+require_once(__ROOT__ . "model/Model.php");
+require_once(__ROOT__ . "model/User.php");
 
-<?php
-class User extends Model {
-    private $id;
-    private $email;
-    private $password;
-    private $userName;
-    private $userType;
-    private $gender;
-    private $dateofbirth;
+class Users extends Model {
+	private $users;
+	private $patients;
+	private $patient;
 
-  function __construct($id, $email = "", $password="", $userName="", $userType="",$gender="",$dateofbirth="") {
-    $this->id = $id;
-	  $this->db = $this->connect();
-
-    if(empty($email) && ($_SESSION['userType'] =='Admin' || $_SESSION['userType'] == 'Patient')){
-      $this->readUser($id);
-    } elseif(empty($email) && $_SESSION['userType'] == 'Doctor'){
-      $this->readPatient($id);
-    } else {
-      $this->email = $email;
-      $this->password = $password;
-      $this->userName = $userName;
-      $this->userType = $userType;
-      $this->gender = $gender;
-      $this->dateofbirth = $dateofbirth;
-    }
-  }
-  
-  function getEmail() {
-    return $this->email;
-  }
-
-  function setEmail($email) {
-    return $this->email = $email;
-  }
-
-  function getPassword() {
-    return $this->password;
-  }
-
-  function setPassword($password) {
-    return $this->password = $password;
-  }
-
-  function getUserName() {
-    return $this->userName;
-  }
-
-  function setUserName($userName) {
-    return $this->userName = $userName;
-  }
-
-  function getUserType() {
-    return $this->userType;
-  }
-
-  function setUserType($userType) {
-    return $this->userType = $userType;
-  }
-  
-  
-  function getGender() {
-    return $this->gender;
-  }
-  function setGender($gender) {
-    return $this->gender = $gender;
-  }
-  
-  function getDateOfBirth() {
-    return $this->dateofbirth;
-  }
-  function setDateOfBirth($dateofbirth) {
-    return $this->dateofbirth = $dateofbirth;
-  }
-
-  function getID() {
-    return $this->id;
-  }
-  function readUser($id){
-    $sql = "SELECT * FROM users where id=".$id;
-    $db = $this->connect();
-    $result = $db->query($sql);
-    if ($result->num_rows == 1){
-        $row = $db->fetchRow();
-        $this->email = $row["email"];
-        $this->password=$row["Password"];
-        $this->userName = $row["Username"];
-        $this->userType = $row["User_type"];
-        $this->gender = $row["Gender"];
-        $this->dateofbirth = $row["dateofbirth"];
-    }
-    else {
-        $this->email = "";
-        $this->password="";
-        $this->userName = "";
-        $this->userType = "";
-        $this->gender = "";
-        $this->dateofbirth = "";
-    }
-  }
-  
-  function editUser($email="", $password="", $userName="", $userType="", $gender="", $dateofbirth=""){
-    $email = $_REQUEST['email'];
-    $password = $_REQUEST['password'];
-    $userName = $_REQUEST['username'];
-    $userType = $_REQUEST['user_type'];
-    $gender = $_REQUEST['gender'];
-    $dateofbirth = $_REQUEST['dateofbirth'];
-    $sql = "update users set email = '$email', password='$password', Username='$userName', User_type='$userType', gender='$gender', dateofbirth='$dateofbirth' where id=$this->id;";
-    if($this->db->query($sql) === true){
-      echo "updated successfully.";
-      $this->readUser($this->id);
-    }
-  }
-  
-  function deleteUser(){
-	  $sql="delete from users where id=$this->id;";
-	  if($this->db->query($sql) === true){
-      echo "deleted successfully.";
-    }
+	function __construct() {
+		$this->fillArray();
+		$this->fillpatientsArray();
 	}
- function readPatient($id){
-    $sql = "SELECT * FROM patients where id=".$id;
-    $db = $this->connect();
-    $result = $db->query($sql);
-    if ($result->num_rows == 1){
-        $row = $db->fetchRow();
-        $this->email = $row["email"];
-        $this->password = '';
-        $this->userName = $row["Username"];
-        $this->userType = "";
-        $this->gender = $row["Gender"];
-        $this->dateofbirth = $row["dateofbirth"];
-    }
-    else {
-        $this->email = "";
-        $this->password = "";
-        $this->userName = "";
-        $this->userType = "";
-        $this->gender = "";
-        $this->dateofbirth = "";
-    }
-  }
-  
 
-  function editPatient($email="", $userName="", $gender="", $dateofbirth=""){
-    $email = $_REQUEST['email'];
-    $userName = $_REQUEST['username'];
-    $gender = $_REQUEST['gender'];
-    $dateofbirth = $_REQUEST['dateofbirth'];
-    $sql = "update patients set email = '$email',Username='$userName', gender='$gender', dateofbirth='$dateofbirth' where id=$this->id;";
-    if($this->db->query($sql) === true){
-      echo "updated successfully.";
-      $this->readPatient($this->id);
-    }
-  }
+	function fillArray() {
+		$this->users = array();
+		$this->db = $this->connect();
+		$result = $this->readUsers();
+		while ($row = $result->fetch_assoc()) {
+			array_push($this->users, new User($row["id"],$row["email"],$row["Password"],$row["Username"],$row["User_type"],$row["Gender"],$row["dateofbirth"]));
+		}
+	}
 
-  function deletePatient(){
-    $sql="delete from patients where id=$this->id;";
-    if($this->db->query($sql) === true){
-      echo "deleted successfully.";
-    }
-  }
+	function getUsers() {
+		return $this->users;
+	}
+
+		function getPatient() {
+		return $this->users;
+	}
+
+	function readUsers(){
+		$sql = "SELECT * FROM users";
+
+		$result = $this->db->query($sql);
+		if ($result->num_rows > 0){
+			return $result;
+		}
+		else {
+			return false;
+		}
+	}
+
+	function insertUser($email, $password, $userName, $userType, $gender, $dateofbirth){
+		$sql = "INSERT INTO users (email, Password, Username, User_type, Gender, dateofbirth) VALUES ('$email','$password', '$userName', '$userType', '$gender', '$dateofbirth')";
+		if($this->db->query($sql) === true){
+			echo "Records inserted successfully.";
+			$this->fillArray();
+		} 
+		else{
+			echo "ERROR: Could not able to execute $sql. " . $conn->error;
+		}
+	}
+	function insertPatient( $userName, $email, $gender, $dateofbirth){
+		$sql = "INSERT INTO patients ( Username, email, Gender, dateofbirth) VALUES ('$userName', '$email', '$gender', '$dateofbirth')";
+		if($this->db->query($sql) === true){
+			echo "Records inserted successfully.";
+			$this->fillArray();
+		} 
+		else{
+			echo "ERROR: Could not able to execute $sql. " . $conn->error;
+		}
+	}
+
+	
+		function insertTestData( $CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST, $email){
+		$sql = "INSERT INTO tests ( CPR, Ferritin, LDH, ALT, CBC, DDimer, AST, email) VALUES ('$CPR', '$Ferritin', '$LDH', '$ALT', '$CBC', '$DDimer', '$AST', '$email')";
+		if($this->db->query($sql) === true){
+			echo "Records inserted successfully.";
+			$this->fillArray();
+		} 
+		else{
+			echo "ERROR: Could not able to execute $sql. " . $conn->error;
+		}
+	}
+
+	function getSearchUsers($searchKey){
+		$searchResult = array();
+		$this->db = $this->connect();
+		$sql = "SELECT * FROM users WHERE email LIKE '%$searchKey%' OR Username LIKE '%$searchKey%' OR User_type LIKE '%$searchKey%'";
+		$result = $this->db->query($sql);
+		if ($result->num_rows > 0){
+			while ($row = $result->fetch_assoc()) {
+				array_push($searchResult, new User($row["id"],$row["email"],$row["Password"],$row["Username"],$row["User_type"],$row["Gender"],$row["dateofbirth"]));
+			}
+		}
+		return $searchResult;
+	}
+
+	function deleteUser($userID){
+		$sql = "DELETE FROM users WHERE id = '$userID'";
+		$result = $this->db->query($sql);
+		if($result){
+			return 'Successfully Deleted!';
+		}else{
+			return 'Failed to delete user!';
+		}
+	}
 
 
- 
+
+	function fillpatientsArray() {
+		$this->patients = array();
+		$this->db = $this->connect();
+		$result = $this->readPatients();
+		while ($row = $result->fetch_assoc()) {
+			array_push($this->patients, new User($row["id"],$row["email"],'$row["Password"]',$row["Username"],'$row["User_type"]',$row["Gender"],$row["dateofbirth"]));
+		}
+	}
+	function getpatients() {
+		return $this->patients;
+	}
+
+	function readPatients(){
+		$sql = "SELECT * FROM patients";
+
+		$result = $this->db->query($sql);
+		if ($result->num_rows > 0){
+			return $result;
+		}
+		else {
+			return false;
+		}
+	}
+
+
+		function getSearchpatients($searchKey){
+		$searchResult = array();
+		$this->db = $this->connect();
+		$sql = "SELECT * FROM patients WHERE id LIKE '%$searchKey%' OR Username LIKE '%$searchKey%' OR Gender LIKE '%$searchKey%'";
+		$result = $this->db->query($sql);
+		if ($result->num_rows > 0){
+			while ($row = $result->fetch_assoc()) {
+				array_push($searchResult, new User($row["id"],$row["Username"],$row["email"],$row["Gender"],$row["dateofbirth"]));
+			}
+		}
+		return $searchResult;
+	}
+
+		function deletePatient($patientID){
+		$sql = "DELETE FROM patients WHERE id = '$patientID'";
+		$result = $this->db->query($sql);
+		if($result){
+			return 'Successfully Deleted!';
+		}else{
+			return 'Failed to delete user!';
+		}
+	}
+
+
+
 }
