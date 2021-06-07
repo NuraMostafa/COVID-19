@@ -73,7 +73,7 @@ if(isset($_POST['login']))	{
       if(isset($_GET['type']) && $_GET['type'] == 'register'){
         echo 'Sign Up';
       }else{
-        echo '<div class="login">Login</div>';
+        echo 'Login';
       }
     ?>
     </h1>
