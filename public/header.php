@@ -1,6 +1,5 @@
 <?php
-
-require_once("connect.php");
+require_once("../app/db/dbh.php");
 ?>
 <!doctype html>
 <html lang="en">
@@ -13,25 +12,25 @@ require_once("connect.php");
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <title>COVID</title>
-<link rel="icon" href="img/favicon.png">
+<link rel="icon" href="assets/img/favicon.png">
 
-<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
-<link rel="stylesheet" href="css/animate.css">
+<link rel="stylesheet" href="assets/css/animate.css">
 
-<link rel="stylesheet" href="css/owl.carousel.min.css">
+<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
 
-<link rel="stylesheet" href="css/themify-icons.css">
+<link rel="stylesheet" href="assets/css/themify-icons.css">
 
-<link rel="stylesheet" href="css/flaticon.css">
+<link rel="stylesheet" href="assets/css/flaticon.css">
 
-<link rel="stylesheet" href="css/magnific-popup.css">
+<link rel="stylesheet" href="assets/css/magnific-popup.css">
 
-<link rel="stylesheet" href="css/nice-select.css">
+<link rel="stylesheet" href="assets/css/nice-select.css">
 
-<link rel="stylesheet" href="css/slick.css">
+<link rel="stylesheet" href="assets/css/slick.css">
 
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="assets/css/style.css">
 <style>
 	a {
 		color: #2554C7;
@@ -49,7 +48,7 @@ require_once("connect.php");
 <div class="row align-items-center">
 <div class="col-lg-12">
 <nav class="navbar navbar-expand-lg navbar-light">
-<a href="Home.php"> <img src="img/Coronavirus-Raw-Materials.png" alt="logo"> </a>
+<a href="Home.php"> <img src="assets/img/Coronavirus-Raw-Materials.png" alt="logo"> </a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 <span class="navbar-toggler-icon"></span>
 </button>
@@ -57,38 +56,38 @@ require_once("connect.php");
 
 <ul class="navbar-nav mr-auto">
 
-<?php if (isset($_SESSION['User_type'])) {
+<?php if (isset($_SESSION['userType'])) {
 
-  if ($_SESSION['User_type'] == "Doctor") { ?>
+  if ($_SESSION['userType'] == "Doctor") { ?>
 		<li class="nav-item active">
 			<a   href="home.php">Home</a>
 		</li>
 		<li class="nav-item active">
-		<a  href="logout.php">Logout</a>
+		<a  href="user.php?type=logout">Logout</a>
 	</li>
 	<?php } 
 
-	 if ($_SESSION['User_type'] == "Patient") { ?>
+	 if ($_SESSION['userType'] == "Patient") { ?>
 
 		<li class="nav-item active">
-		<a  href="test.php"> Tests</a>
+		<a  href="tests.php"> Tests</a>
 	</li>
 
 		<li class="nav-item active">
 		<a href="results.php"> Results</a>
 	</li>
 		<li class="nav-item active">
-		<a  href="logout.php"> Logout</a>
+		<a  href="user.php?type=logout"> Logout</a>
 	</li>
 	<?php } 
 
-	 if ($_SESSION['User_type'] == "Admin") { ?>
+	 if ($_SESSION['userType'] == "Admin") { ?>
 
 		<li class="nav-item active">
-			<a   href="adminview.php" >View Users</a>
+			<a   href="admin.php" >View Users</a>
 		</li>
 <li class="nav-item active">
-<a   href="logout.php"> Logout</a>
+<a   href="user.php?type=logout"> Logout</a>
 </li>
 <?php } ?>
 	
@@ -101,14 +100,14 @@ require_once("connect.php");
 else { ?>
 
 	<li class="nav-item active">
-	<a href="home.php">Home</a>
+	<a href="index.php">Home</a>
 	</li>
 
 	<li class="nav-item">
-<a href="register.php">Signup</a>
+<a href="user.php?type=register">Sign Up</a>
 </li>
 <li class="nav-item">
-<a  href="login.php">Login</a>
+<a  href="user.php">Login</a>
 </li>
 	
 <?php } ?>
