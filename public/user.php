@@ -60,7 +60,7 @@ if(isset($_POST['login']))	{
 
   <link rel="stylesheet" href="assets/css/slick.css">
 
-  <link rel="stylesheet" href="assets/css/style.css">
+  
 </head>
 
 <body>
@@ -73,7 +73,7 @@ if(isset($_POST['login']))	{
       if(isset($_GET['type']) && $_GET['type'] == 'register'){
         echo 'Sign Up';
       }else{
-        echo 'Login';
+        echo '<div class="login">Login</div>';
       }
     ?>
     </h1>
