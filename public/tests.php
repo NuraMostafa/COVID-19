@@ -16,12 +16,6 @@ if (isset($_GET['action']) && !empty($_GET['action'])) {
 if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 'Patient'){
   header('Location: index.php');
 }
-if(isset($_POST['submit'])){
-   $command = escapeshellcmd('');
-    $output1 = shell_exec($command);
-    echo $output1;
-}
-?>
 ?>
 <!doctype html>
 <html lang="en">
@@ -63,7 +57,7 @@ if(isset($_POST['submit'])){
 <div class="container">
   <div class="row justify-content-between">
     <div class="col-lg">
-    <br><h1 >Upload your blood tests values</h1><br>
+    <br><h1 style="margin: 0 auto; width:250px;">Upload your blood tests values</h1><br>
       <div class="regervation_part_iner" style="display: inline-block;">
         <div class="form-row">
           
