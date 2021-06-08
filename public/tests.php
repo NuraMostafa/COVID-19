@@ -10,6 +10,9 @@ $controller = new UsersController($model);
 $view = new ViewUser($controller, $model);
 $userData = array();
 $addDoctor= '';
+if(isset($_POST['save'])){
+    header("Location: results.php");
+  }
 if (isset($_GET['action']) && !empty($_GET['action'])) {
   $controller->{$_GET['action']}();
 }
@@ -57,7 +60,7 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 'Patient'){
 <div class="container">
   <div class="row justify-content-between">
     <div class="col-lg">
-    <br><h1 style="margin: 0 auto; width:250px;">Upload your blood tests values</h1><br>
+    <br><h1 style="margin: 0 auto; width:500px;">Upload your blood tests values</h1><br>
       <div class="regervation_part_iner" style="display: inline-block;">
         <div class="form-row">
           
