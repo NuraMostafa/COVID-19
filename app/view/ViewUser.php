@@ -68,7 +68,7 @@ $str='<form method="POST" action="user.php?action=insert" enctype="multipart/for
 <input type="date" name= "dateofbirth" class="input" id="birthday" placeholder="Your Birthday">
 </div>
 <div class="regerv_btn">
-<button type="submit" name="submit"class="btn_2">SignUp</button>
+<button type="submit" name="submit" class="btn_2"> SignUp </button>
 </div>
 </form>';
 return $str;
@@ -93,7 +93,7 @@ return $str;
 		<br>
 		<div class="form-group col-lg-12">
 			<form method="GET" action="">
-            <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey']) && !empty($_GET['searchKey'])) ? $_GET['searchKey'] : '') .'">  <button class = "btn_2" style="border: none;color: white;padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px;" type="submit">Search</button>
+            <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey']) && !empty($_GET['searchKey'])) ? $_GET['searchKey'] : '') .'">  <button class = "btn_2" style="width: 200px; border: none;color: white; padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;" type="submit">Search</button>
             </form>
 			<br><br>
 			<div class="row" id="old">
@@ -167,13 +167,13 @@ return $str;
 				<br>
 				</div>
 				<h4 style="font-size: 23px;">Date of Birth</h4>
-<div class= "input-container">
-<i class="fa fa-calendar icon"></i>
+               <div class= "input-container">
+               <i class="fa fa-calendar icon"></i>
 				<input type="date" name= "dateofbirth" class="input" id="birthday" placeholder="Your Birthday" value="'.$userData->getDateOfBirth().'">
 				<br>
 				</div>
 				<div class="regerv_btn">
-				<button type="submit" name="save"class="btn_2">Update</button>
+				<button type="submit" name="save" class="btn_2">Update</button>
 				</div>
 				</div>
 			</form>
@@ -213,7 +213,11 @@ $str ='<div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 <br></br>
 </div>
 <div class="regerv_btn">
-<button type="submit" name="submit"class="btn_2">Submit</button>
+
+<div class="regerv_btn">
+				<button type="submit" name="save" class="btn_2" style="width: 200px;">Add Doctor</button>
+				</div>
+
 </div>
 </form>
 </div>';
@@ -229,7 +233,7 @@ return $str;
 		<br>
 		<div class="form-group col-lg-12">
 			<form method="GET" action="">
-            <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey']) && !empty($_GET['searchKey'])) ? $_GET['searchKey'] : '') .'">  <button style="background-color: #008CBA;border: none;color: white;padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;font-size: 14px;" type="submit">Search</button>
+            <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey']) && !empty($_GET['searchKey'])) ? $_GET['searchKey'] : '') .'">  <button class = "btn_2" style="width: 200px; border: none;color: white; padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;" type="submit">Search</button>
             </form>
 			<br><br>
 			<div class="row" id="old">
@@ -275,8 +279,6 @@ return $str;
 
 	public function viewProfile($userData){
 		$str='
-
-
 		<div class="card">
   <img width:15000px; src="assets/img/Profilep.png" style="width:70%">
   <h1>'.$userData->getUserName().'</h1>
@@ -366,8 +368,9 @@ display: block;">
 
 <input type="email" class="inputemail" placeholder="Enter your email..." required name="email" onkeyup="filter(this)" id="email"><br>
 </div>
-
+<h4 style= " color: #114C56; font-size: 25px;">Inset CT image:</h4>
 <input class="inputtest" type="file" accept="img/*" name="image"><br><br>
+
 <div class="input_wrapper">
 <h4 style= " color: #114C56; font-size: 25px;">CRP:</h4>
 <input type="number" class="inputtest" placeholder="Enter CRP value" name="CPR" onkeyup="filter(this)" id="CPR" /><span style="margin-left:-40px; color: black;">mg/l</span>
@@ -403,7 +406,9 @@ display: block;">
 <input type="number" class="inputtest" placeholder="Enter AST value" name="AST" onkeyup="filter(this)" id="AST" /><span style="margin-left:-37px; color: black;">U/l</span>
 
 </div>
-<div class="regerv_btn"><button type="submit" name="submit"class="btn_2">Submit</button></div><br><br>
+<div class="input_wrapper">
+<div class="regerv_btn"><button type="submit" name="save" class="btn_2" style="width: 200px;">Submit</button></div>
+</div>
 
 </form>
 </div>';
@@ -433,10 +438,10 @@ $str ='<div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 <div class= "input-container">
 <i class="fa fa-calendar icon"></i>
 <input type="date" name= "dateofbirth" class="input" id="birthday" placeholder="Your Birthday">
-<br>
+
 </div>
 <div class="regerv_btn">
-<button  type="submit" name="submit"class="btn_2">Submit</button>
+<button type="submit" name="save" style= " width: 200px; " class="btn_2">Submit</button>
 </div>
 </form>';
 return $str;
