@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 define('__ROOT__', "../app/");
@@ -10,9 +11,15 @@ $controller = new UsersController($model);
 $view = new ViewUser($controller, $model);
 $userData = array();
 $addDoctor= '';
+if(isset($_POST['save'])){
+    
+   
+    header("Location: admin.php");
+  }
 if (isset($_GET['action']) && !empty($_GET['action'])) {
   $controller->{$_GET['action']}();
 }
+
 if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 'Admin'){
   header('Location: index.php');
 }
