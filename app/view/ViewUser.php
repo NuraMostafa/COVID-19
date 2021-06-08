@@ -277,15 +277,15 @@ return $str;
 		$str='
 
 
-		<div   class="card">
-  <img width:15000px; src="assets/img/picon.png" style="width:70%">
+		<div class="card">
+  <img width:15000px; src="assets/img/Profilep.png" style="width:70%">
   <h1>'.$userData->getUserName().'</h1>
   <p class="title">'.$userData->getEmail().'</p>
   <p class="title">'.$userData->getGender().'</p>
   <p class="title">'.$userData->getDateOfBirth().'</p>
   <a><i class="fa fa-id-badge">'.$userData->getID().'</i></a>
   <a href="edituser.php?userID='.$userData->getID().'"> Edit </a>
-  <a href="profile.php?action=deleteUser&userID='.$userData->getID().'"> Delete </a>
+  <a href="profile.php?action=deleteUser&userID='.$userData->getID().'" style=" display: inline-block;""> Delete </a>
   
    </div>'
 ;
