@@ -10,6 +10,9 @@ $controller = new UsersController($model);
 $view = new ViewUser($controller, $model);
 $userData = array();
 $addDoctor= '';
+if(isset($_POST['save'])){
+    header("Location: doctor.php");
+  }
 if (isset($_GET['action']) && !empty($_GET['action'])) {
   $controller->{$_GET['action']}();
 }
