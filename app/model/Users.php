@@ -44,7 +44,7 @@ class Users extends Model {
 	function insertUser($email, $password, $userName, $userType, $gender, $dateofbirth){
 		$sql = "INSERT INTO users (email, Password, Username, User_type, Gender, dateofbirth) VALUES ('$email','$password', '$userName', '$userType', '$gender', '$dateofbirth')";
 		if($this->db->query($sql) === true){
-			echo "Records inserted successfully.";
+			
 			$this->fillArray();
 		} 
 		else{
@@ -54,7 +54,7 @@ class Users extends Model {
 	function insertPatient( $userName, $email, $gender, $dateofbirth){
 		$sql = "INSERT INTO patients ( Username, email, Gender, dateofbirth) VALUES ('$userName', '$email', '$gender', '$dateofbirth')";
 		if($this->db->query($sql) === true){
-			echo "Records inserted successfully.";
+			
 			$this->fillArray();
 		} 
 		else{
@@ -66,7 +66,7 @@ class Users extends Model {
 		function insertTestData( $CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST, $email){
 		$sql = "INSERT INTO tests ( CPR, Ferritin, LDH, ALT, CBC, DDimer, AST, email) VALUES ('$CPR', '$Ferritin', '$LDH', '$ALT', '$CBC', '$DDimer', '$AST', '$email')";
 		if($this->db->query($sql) === true){
-			echo "Records inserted successfully.";
+			
 			$this->fillArray();
 		} 
 		else{
