@@ -368,7 +368,7 @@ display: block;">
 
 <input type="email" class="inputemail" placeholder="Enter your email..." required name="email" onkeyup="filter(this)" id="email"><br>
 </div>
-<h4 style= " color: #114C56; font-size: 25px;">Inset CT image:</h4>
+<h4 style= " color: #114C56; font-size: 25px;">Insert CT image:</h4>
 <input class="inputtest" type="file" accept="img/*" name="image"><br><br>
 
 <div class="input_wrapper">
