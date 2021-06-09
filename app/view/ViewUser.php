@@ -1,5 +1,3 @@
-
-
 <?php
 require_once(__ROOT__ . "view/View.php");
 
@@ -45,7 +43,6 @@ $str='<form method="POST" action="user.php?action=insert" enctype="multipart/for
 <div class= "input-container">
 <i class="fa fa-envelope icon"></i>
 <input type="email" class="input" placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail"><br>
-
 </div>
 <div class= "input-container">
 <i class="fa fa-key icon"></i>
@@ -148,7 +145,6 @@ return $str;
 				<input type="password" class="input" placeholder="Enter your password" required name="password" onkeyup="filter(this)" id="rwgisterpassword" value="'.$userData->getPassword().'"><br>
 				</div>
 				<input type="password" class="input" required name="user_type" value="'.$userData->getUserType().'" hidden>
-
 			<h4 style="font-size: 23px;">Select Gender</h4>
 <div class= "input-container">
 <i class="fa fa-transgender icon"></i>
@@ -192,13 +188,11 @@ $str ='<div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 <div class= "input-container">
 <i class="fa fa-envelope icon"></i>
 <input type="email" class="input" placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail"><br>
-
 </div>
 <div class= "input-container">
 <i class="fa fa-key icon"></i>
 <input type="password" class="input" placeholder="Enter your password" required name="password" onkeyup="filter(this)" registerpassword"><br>
 </div>
-
 <div class= "input-container">
 <i class="fa fa-transgender icon"></i>
 <select name="gender" class="input" id="Select">
@@ -213,11 +207,9 @@ $str ='<div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 <br></br>
 </div>
 <div class="regerv_btn">
-
 <div class="regerv_btn">
 				<button type="submit" name="save" class="btn_2" style="width: 200px;">Add Doctor</button>
 				</div>
-
 </div>
 </form>
 </div>';
@@ -254,21 +246,19 @@ return $str;
 				            <td>'.$PatientsArray[$i]->getGender().'</td>
 				            <td><a href="editPatient.php?patientID='.$PatientsArray[$i]->getID().'"> Edit </a></td>
 				            <td><a href="doctor.php?action=deletePatient&patientID='.$PatientsArray[$i]->getID().'"> Delete </a></td>
-
 			            </tr>';                    
 	            }
             } else {
               $str.= "<p style='color:black;'>No data to view</p>";
             }
             $str.= '</table>
-
-
 					<br> <br>
 					<div class="regerv_btn">
 					<a href="addPatient.php" class="btn_2">Add Patient</a>
 					</div>
-
-
+					<div class="regerv_btn">
+					<a href="tests.php" class="btn_2">Add Test</a>
+					</div>
 						</div>';  
 
 					return $str;
@@ -322,7 +312,6 @@ $str = ' <div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 				
 				<input type="email" class="input" placeholder="Enter your email" required name="email" onkeyup="filter(this)" id="registeremail" value="'.$patientData->getEmail().'"><br>
 				</div>
-
 				<h4 style="font-size: 23px; width:150px;" >Select Gender:</h4>
 <div class= "input-container">
 <i class="fa fa-transgender icon"></i>
@@ -363,53 +352,42 @@ $str=' <div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 <form method="POST" action="tests.php?action=addTest" enctype="multipart/form-data" style="   max-width: 100%;
 margin: 0 auto;  
 display: block;">
-
 <div class= "input-container">
-
 <input type="email" class="inputemail" placeholder="Enter your email..." required name="email" onkeyup="filter(this)" id="email"><br>
 </div>
 <h4 style= " color: #114C56; font-size: 25px;">Insert CT image:</h4>
 <input class="inputtest" type="file" accept="img/*" name="image"><br><br>
-
 <div class="input_wrapper">
 <h4 style= " color: #114C56; font-size: 25px;">CRP:</h4>
-<input type="number" class="inputtest" placeholder="Enter CRP value" name="CPR" onkeyup="filter(this)" id="CPR" /><span style="margin-left:-40px; color: black;">mg/l</span>
-
+<input type="float" class="inputtest" placeholder="Enter CRP value" name="CPR" onkeyup="filter(this)" id="CPR" /><span style="margin-left:-40px; color: black;">mg/l</span>
 </div>
 <div class="input_wrapper">
 <h4 style= " color: #114C56; font-size: 25px;">Ferritin:</h4>
-<input type="number" class="inputtest" placeholder="Enter Ferritin value" name="Ferritin" onkeyup="filter(this)" id="Ferritin" /><span style="margin-left:-53px; color: black;">ng/mL</span>
-
+<input type="float" class="inputtest" placeholder="Enter Ferritin value" name="Ferritin" onkeyup="filter(this)" id="Ferritin" /><span style="margin-left:-53px; color: black;">ng/mL</span>
 </div>
 <div class="input_wrapper">
 <h4 style= " color: #114C56; font-size: 25px;">LDH:</h4>
-<input type="number" class="inputtest" placeholder="Enter LDH value" name="LDH" onkeyup="filter(this)" id="LDH" /><span style="margin-left:-37px; color: black;">U/l</span>
-
+<input type="float" class="inputtest" placeholder="Enter LDH value" name="LDH" onkeyup="filter(this)" id="LDH" /><span style="margin-left:-37px; color: black;">U/l</span>
 </div>
 <div class="input_wrapper">
 <h4 style= " color: #114C56; font-size: 25px;">ALT:</h4>
-<input type="number" class="inputtest" placeholder="Enter ALT value" name="ALT" onkeyup="filter(this)" id="ALT" /><span style="margin-left:-37px; color: black;">U/l</span>
-
+<input type="float" class="inputtest" placeholder="Enter ALT value" name="ALT" onkeyup="filter(this)" id="ALT" /><span style="margin-left:-37px; color: black;">U/l</span>
 </div>
 <div class="input_wrapper">
-<h4 style= " color: #114C56; font-size: 25px;">CBC:</h4>
-<input  type="number" class="inputtest" placeholder="Enter CBC value" name="CBC" onkeyup="filter(this)" id="CBC" /><span style="margin-left:-40px; color: black;">g/dl</span>
-
+<h4 style= " color: #114C56; font-size: 25px;">Lymphocytes:</h4>
+<input  type="float" class="inputtest" placeholder="Enter Lymphocytes value" name="CBC" onkeyup="filter(this)" id="CBC" /><span style="margin-left:-40px; color: black;">g/dl</span>
 </div>
 <div class="input_wrapper">
 <h4 style= " color: #114C56; font-size: 25px;">D-Dimer:</h4>
-<input type="number" class="inputtest" placeholder="Enetr D-Dimer value" name="DDimer" onkeyup="filter(this)" id="DDimer" /><span style="margin-left:-90px; color: black;">µg FEU/mL</span>
-
+<input type="float" class="inputtest" placeholder="Enetr D-Dimer value" name="DDimer" onkeyup="filter(this)" id="DDimer" /><span style="margin-left:-90px; color: black;">µg FEU/mL</span>
 </div>
 <div class="input_wrapper">
 <h4 style= " color: #114C56; font-size: 25px;">AST:</h4>
-<input type="number" class="inputtest" placeholder="Enter AST value" name="AST" onkeyup="filter(this)" id="AST" /><span style="margin-left:-37px; color: black;">U/l</span>
-
+<input type="float" class="inputtest" placeholder="Enter AST value" name="AST" onkeyup="filter(this)" id="AST" /><span style="margin-left:-37px; color: black;">U/l</span>
 </div>
 <div class="input_wrapper">
 <div class="regerv_btn"><button type="submit" name="save" class="btn_2" style="width: 200px;">Submit</button></div>
 </div>
-
 </form>
 </div>';
 return $str;
@@ -438,7 +416,6 @@ $str ='<div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 <div class= "input-container">
 <i class="fa fa-calendar icon"></i>
 <input type="date" name= "dateofbirth" class="input" id="birthday" placeholder="Your Birthday">
-
 </div>
 <div class="regerv_btn">
 <button type="submit" name="save" style= " width: 200px; " class="btn_2">Submit</button>
@@ -448,7 +425,6 @@ return $str;
 
 
 }
-
+	
 }
 ?>
-
