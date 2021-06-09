@@ -1,38 +1,23 @@
 import cv2
-import openpyxl
-from tqdm import tqdm
-import random
-import tensorflow as tf
-import tensorflow.compat.v1 as tf
-import pandas as pd
-from keras.preprocessing.image import ImageDataGenerator 
-from keras.models import Sequential 
-from keras.layers import Conv2D, MaxPooling2D 
-from keras.layers import Activation, Dropout, Flatten, Dense 
-from keras import backend as K 
 import numpy as np
 import os
-import numpy as np
-import os
-import matplotlib.pyplot as plt
-import openpyxl
-from tqdm import tqdm
-import random
-import tensorflow as tf
-import tensorflow.compat.v1 as tf
-import pandas as pd
-from keras.preprocessing.image import ImageDataGenerator 
-from keras.models import Sequential 
-from keras.layers import Conv2D, MaxPooling2D 
-from keras.layers import Activation, Dropout, Flatten, Dense 
-from keras import backend as K 
+from keras.models import Sequential
+from keras.layers import Conv2D, MaxPooling2D
+from keras.layers import Activation, Dropout, Flatten, Dense
+from keras import backend as K
 import csv
-import matplotlib.pyplot as plt
-from skimage import data
-from skimage.color import rgb2gray
-from PIL import Image, ImageOps
-from PIL import Image
-import cv2 as cv
+import pickle
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Activation
+from keras.optimizers import SGD
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+import pickle
+from keras.models import load_model
+import h5py
+import keras
+import sys
+import tensorflow as tf
 
 img_width, img_height = 224, 224
 
@@ -51,7 +36,6 @@ with open('covidtest.csv', mode='w') as file:
         imagecovidtest = os.listdir(read_folder_name )[j]
         writer.writerow([imagecovidtest,"1"])
 
-#print(namecolumns1)
 
 #covidtranning part
       
@@ -69,7 +53,6 @@ with open('covidtrain.csv', mode='w') as file:
         writer.writerow([imagecovidtrain,"1"])
         break 
 
-#print(namecolumns1)
 
 
 
@@ -110,40 +93,43 @@ with open('noncovidtrain.csv', mode='w') as file:
 train_images = np.zeros((600, img_width, img_height, 3), dtype='uint8')
 train_labels = np.zeros((600, 1), dtype='uint8')
 
-
-for x in range(273):
+for x in range(244):
   if x % 2 == 0:
     imgcovid = os.listdir("/content/drive/MyDrive/srs/covidtrain")
-    img = cv2.imread(imgcovid[0])
+   # print(imgcovid[0])
+    img = cv2.imread("/content/drive/MyDrive/srs/covidtrain/" + imgcovid[x])
+   # print(img)
     img = cv2.medianBlur(img, 3)
-    img=train_images[x]
+    train_images[x] = cv2.resize(img, (224,224))
     train_labels[x]=1
-
+   # print(train_images[x])
   else:
     imgnoncovid = os.listdir("/content/drive/MyDrive/srs/noncovidtrain")
-    img = cv2.imread(imgnoncovid[0])
+    img = cv2.imread("/content/drive/MyDrive/srs/noncovidtrain/" + imgnoncovid[x])
     img = cv2.medianBlur(img, 3)
-    img=train_images[x]
-    train_labels[x]=0   
+    train_images[x] = cv2.resize(img, (224,224))
+    train_labels[x]=0 
 
+    
 
 #part2
 
-test_labels = np.zeros((300, 1), dtype='uint8')
-test_images = np.zeros((300, img_width, img_height, 3), dtype='uint8')
+test_labels = np.zeros((600, 1), dtype='uint8')
+test_images = np.zeros((600, img_width, img_height, 3), dtype='uint8')
 
-for z in range(117):
+for z in range(104):
   if  z % 2 == 0:
     imagecovidtest = os.listdir("/content/drive/MyDrive/srs/covidtest")
-    img2 = cv2.imread(imagecovidtest[0])
+    img2 = cv2.imread("/content/drive/MyDrive/srs/covidtest/" + imagecovidtest[z])
     img2 = cv2.medianBlur(img2, 3)
-    img2=test_images[z]
+    test_images[z] = cv2.resize(img2, (224,224))
     test_labels[z]=1
+    
   else:
     imgnoncovidtest = os.listdir("/content/drive/MyDrive/srs/noncovidtest")
-    img2 = cv2.imread(imgnoncovidtest[0])
-    img = cv2.medianBlur(img, 3)
-    img2= test_images[z]
+    img2 = cv2.imread("/content/drive/MyDrive/srs/noncovidtest/" + imgnoncovidtest[z])
+    img2 = cv2.medianBlur(img2, 3)
+    test_images[z] = cv2.resize(img2, (224,224))
     test_labels[z]=0
 
 
@@ -171,10 +157,15 @@ model.compile(loss ='binary_crossentropy',
                 optimizer ='rmsprop', 
               metrics =['accuracy']) 
 
-results=model.fit(train_images, train_labels, epochs=6)
+results=model.fit(train_images, train_labels,epochs=2)
 
 results1 = model.evaluate(test_images,test_labels, batch_size=100)
+model.save('model.h5')
+model.save_weights('model_weights.h5')
 
-model.save("my_model")
 
-
+pred = model.predict(test_images)
+print(pred)
+max_predictions = tf.argmax(pred, axis=1)
+#print(max_predictions)
+print(tf.math.confusion_matrix(labels=test_labels, predictions=max_predictions))
