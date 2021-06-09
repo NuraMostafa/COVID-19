@@ -16,7 +16,7 @@ if(isset($_POST['save'])){
 if (isset($_GET['action']) && !empty($_GET['action'])) {
   $controller->{$_GET['action']}();
 }
-if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 'Patient'){
+if(!isset($_SESSION['userType']) || $_SESSION['userType'] == 'Admin' ){
   header('Location: index.php');
 }
 ?>
