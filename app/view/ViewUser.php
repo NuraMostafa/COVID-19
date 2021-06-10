@@ -9,10 +9,7 @@ class ViewUser extends View{
 		$str.="<h5>Gender: ".$this->model->getGender()."</h5>";
 		$str.="<h5>Phone: ".$this->model->getDateOfBirth()."</h5>";
 		$str.="<br><br>";
-		$str.="<a href='profile.php?action=edit'>Edit Profile </a><br><br>";
-		$str.="<a href='profile.php?action=movie'>My Movies </a><br><br>";
-		$str.="<a href='profile.php?action=signOut'>SignOut </a><br><br>";
-		$str.="<a href='profile.php?action=delete'>Delete Account </a>";
+		
 		return $str;
 	}
 		
