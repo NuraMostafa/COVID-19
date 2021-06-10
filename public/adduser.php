@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 define('__ROOT__', "../app/");
@@ -12,8 +11,6 @@ $view = new ViewUser($controller, $model);
 $userData = array();
 $addDoctor= '';
 if(isset($_POST['save'])){
-    
-   
     header("Location: admin.php");
   }
 if (isset($_GET['action']) && !empty($_GET['action'])) {
