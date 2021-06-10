@@ -16,13 +16,13 @@ def uploadText():
     textDD = request.form['DDimer']
     textAST = request.form['AST']
 
-    text1 = str(text)
+   /* text1 = str(text)
     text2 = str(textFer)
     text3 = str(textLDH)
     text4 = str(textALT)
     text5 = str(textCBC)
     text6 = str(textDD)
-    text7 = str(textAST)
+    text7 = str(textAST)*/
 
     # textt = str(150)
     # print(text)
