@@ -66,6 +66,7 @@ class Users extends Model {
 	
 		function insertTestData( $CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST, $email){
 		$sql = "INSERT INTO tests ( CPR, Ferritin, LDH, ALT, CBC, DDimer, AST, email) VALUES ('$CPR', '$Ferritin', '$LDH', '$ALT', '$CBC', '$DDimer', '$AST', '$email')";
+		if($CPR >= 12)
 		if($this->db->query($sql) === true){
 			
 			$this->fillArray();
@@ -113,7 +114,8 @@ class Users extends Model {
 	}
 
 	function readPatients(){
-		$sql = "SELECT * FROM patients";
+
+		$sql = "SELECT * FROM patients ";
 
 		$result = $this->db->query($sql);
 		if ($result->num_rows > 0){
