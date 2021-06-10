@@ -1,3 +1,4 @@
+
 <?php
 require_once(__ROOT__ . "model/Model.php");
 require_once(__ROOT__ . "model/User.php");
@@ -42,8 +43,8 @@ class Users extends Model {
 	}
 
 	function insertUser($email, $password, $userName, $userType, $gender, $dateofbirth){
-		$hash = password_hash($password, PASSWORD_DEFAULT);
-		$sql = "INSERT INTO users (email, Password, Username, User_type, Gender, dateofbirth) VALUES ('$email','$hash', '$userName', '$userType', '$gender', '$dateofbirth')";
+		
+		$sql = "INSERT INTO users (email, Password, Username, User_type, Gender, dateofbirth) VALUES ('$email','$password', '$userName', '$userType', '$gender', '$dateofbirth')";
 		if($this->db->query($sql) === true){
 			
 			$this->fillArray();
