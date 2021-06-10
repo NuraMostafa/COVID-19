@@ -70,10 +70,10 @@ if(!isset($_SESSION['userType']) || $_SESSION["userType"] != "Doctor"){
             <?php 
               echo $view->addPatientData(); ?>
             
-  			</div>
-  		</div>
-	  </div>
-	</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 </section>
 <script src="assets/js/jquery-3.4.1.min.js"></script>
