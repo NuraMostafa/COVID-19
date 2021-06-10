@@ -1,4 +1,4 @@
-<?php
+  <?php
   require_once(__ROOT__ . "model/Model.php");
 ?>
 
@@ -144,6 +144,7 @@ class User extends Model {
         $this->dateofbirth = "";
     }
   }
+
   
 
   function editPatient($email="", $userName="", $gender="", $dateofbirth=""){
