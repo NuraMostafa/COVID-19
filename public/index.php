@@ -1,5 +1,3 @@
-
-
 <?php
 require_once(__ROOT__ . "view/View.php");
 
