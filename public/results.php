@@ -1,17 +1,9 @@
 <?php
 session_start();
 define('__ROOT__', "../app/");
-require_once(__ROOT__ . "model/Results.php");
-require_once(__ROOT__ . "controller/ResultsController.php");
-require_once(__ROOT__ . "view/ViewResult.php");
 
-$model = new Results();
-$controller = new ResultsController($model);
-$view = new ViewResult($controller, $model);
 
-$resultPageData = '';
-
-if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 'Patient'){
+if(!isset($_SESSION['userType']) || $_SESSION['userType'] == 'Admin'){
   header('Location: index.php');
 }
 
