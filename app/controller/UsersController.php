@@ -114,18 +114,24 @@ if( $CPR < 0 || $CPR > 1000){
      	return false;
      }
        if ($CBC < 0 || $CBC > 4000){
-      	header("location:tests.php");
-     	alert( 'Please enter a correct value');
+      	echo"
+            <script>alert('Please enter a correct value');</script>
+           <script>window.location.replace('http://localhost/Covid-4/public/tests.php');</script>
+            ";
      	return false;
      }
        if ($DDimer < 0 || $DDimer > 1000){
-      	header("location:tests.php");
-     	alert( 'Please enter a correct value');
+      	echo"
+            <script>alert('Please enter a correct value');</script>
+           <script>window.location.replace('http://localhost/Covid-4/public/tests.php');</script>
+            ";
      	return false;
      }
       if ($AST < 0 || $AST > 1000){
-     	header("location:tests.php");
-     	alert( 'Please enter a correct value');
+     	echo"
+            <script>alert('Please enter a correct value');</script>
+           <script>window.location.replace('http://localhost/Covid-4/public/tests.php');</script>
+            ";
      	return false;
      }
 
