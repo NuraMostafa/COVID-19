@@ -51,7 +51,7 @@ Better Doctor</h1>
 Pneumonia is also an infection that causes inflammation in the air sacs in lungs.
  COVID-19 and pneumonia have similar symptoms in lungs as breathing problems that appear
   in CT scan image as ground-glass opacity (GGO).</p>
-<a href="tests.php" class="btn_2">Upload your Tests</a>
+<a href="user.php" class="btn_2">Upload your Tests</a>
 </div>
 </div>
 </div>
