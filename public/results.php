@@ -68,13 +68,11 @@ if(!isset($_SESSION['userType']) || $_SESSION['userType'] == 'Admin'){
                     <th>Statuts</th> 
                    
                   </tr>
-                  
-           
                     <tr>
                             <td>1</td>
                             <td style=" color: white;">Nura</td>
                             <td style=" color: white;">Female</td>
-                            <td style=" color: #00FF01;">Psostive</td>
+                            <td style=" color: #00FF01;">Positive</td>
                         </tr>';                    
                 }
             } 
