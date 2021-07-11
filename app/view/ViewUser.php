@@ -5,14 +5,11 @@ class ViewUser extends View{
 
 	public function output(){
 		$str="";
-		$str.="<h1>Welcome ".$this->model->getUserName()."</h1>";
-		$str.="<h5>Gender: ".$this->model->getGender()."</h5>";
-		$str.="<h5>Phone: ".$this->model->getDateOfBirth()."</h5>";
+		$str.="<h1>".$this->model->getUserName()."</h1>";
+		$str.="<h5>".$this->model->getGender()."</h5>";
+		$str.="<h5>".$this->model->getDateOfBirth()."</h5>";
 		$str.="<br><br>";
-		$str.="<a href='profile.php?action=edit'>Edit Profile </a><br><br>";
-		$str.="<a href='profile.php?action=movie'>My Movies </a><br><br>";
-		$str.="<a href='profile.php?action=signOut'>SignOut </a><br><br>";
-		$str.="<a href='profile.php?action=delete'>Delete Account </a>";
+	
 		return $str;
 	}
 		
@@ -224,7 +221,7 @@ return $str;
 		<h1 >View Patients</h1>
 		<br>
 		<div class="form-group col-lg-12">
-			<form method="GET" action="">
+						<form method="GET" action="">
             <input type="text" placeholder="Search" style="margin: 0 auto; width: 300px; display:inline-block;" class="form-control" id="searchtext" name="searchKey" value="'.((isset($_GET['searchKey']) && !empty($_GET['searchKey'])) ? $_GET['searchKey'] : '') .'">  <button class = "btn_2" style="width: 200px; border: none;color: white; padding: 1px 17px;text-align: center;text-decoration: none;display: inline-block;" type="submit">Search</button>
             </form>
 			<br><br>
@@ -265,6 +262,24 @@ return $str;
 
      
 	}
+		public function viewResult($userData){
+		$str='
+		<div class="card">
+  <img width:15000px; src="assets/img/Profilep.png" style="width:70%">
+  <h1>'.$userData->getUserName().'</h1>
+  <p class="title">'.$userData->getEmail().'</p>
+  <p class="title">'.$userData->getGender().'</p>
+  <p class="title">'.$userData->getDateOfBirth().'</p>
+  <a><i class="fa fa-id-badge">'.$userData->getID().'</i></a>
+  <a href="edituser.php?userID='.$userData->getID().'"> Edit </a>
+  <a href="profile.php?action=deleteUser&userID='.$userData->getID().'" style=" display: inline-block;""> Delete </a>
+  
+   </div>'
+;
+		
+        return $str;	
+	}
+
 
 
 	public function viewProfile($userData){
@@ -345,7 +360,22 @@ $str = ' <div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 		return $str;
 	
 	}
+	 function validatetests($CPR )
+    {      $passlength=strlen($CPR);
+          if($passlength >2){
+          	//echo "<script>href= 'tests.php?action=addTest';</script>";
+            
+              header("location:tests.php");
+               // echo "<script>('incorrect');</script>";
 
+ // true
+             alert('test'); // win
+            
+            return false;
+        }
+  // throw new Exception ("Invalid password !!");
+      return true;
+}
 
 function testsform(){
 $str=' <div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
@@ -359,7 +389,10 @@ display: block;">
 <input class="inputtest" type="file" accept="img/*" name="image"><br><br>
 <div class="input_wrapper">
 <h4 style= " color: #114C56; font-size: 25px;">CRP:</h4>
-<input type="float" class="inputtest" placeholder="Enter CRP value" name="CPR" onkeyup="filter(this)" id="CPR" /><span style="margin-left:-40px; color: black;">mg/l</span>
+
+
+<input type="float" class="inputtest" placeholder="Enter CRP value" name="CPR" onkeyup="filter(this)"  id="CPR" /><span style="margin-left:-40px; color: black;">mg/l</span>
+
 </div>
 <div class="input_wrapper">
 <h4 style= " color: #114C56; font-size: 25px;">Ferritin:</h4>
