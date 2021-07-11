@@ -1,5 +1,4 @@
 <?php
-
 require_once("../app/db/dbh.php");
 ?>
 <!doctype html>
@@ -7,7 +6,11 @@ require_once("../app/db/dbh.php");
 <head>
 
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1 , shrink-to-fit=no">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <title>COVID</title>
 <link rel="icon" href="assets/img/favicon.png">
 
@@ -39,51 +42,97 @@ require_once("../app/db/dbh.php");
 </style>
 </head>
 <body>
-<footer class="footer-area">
-<div class="footer section_padding">
-<div class="container">
-<div class="row justify-content-between">
-<div class="col-xl-2 col-md-4 col-sm-6 single-footer-widget">
-<a href="#" class="footer_logo"> <img src="assets/img/Coronavirus-Raw-Materials.png" alt="#"> </a>
-<p>COVID-19 is an infectious disease that mainly affects lungs. Pneumonia is also an infection that causes inflammation in the air sacs in lungs. </p>
-<div class="social_logo">
-<a href="#"><i class="ti-facebook"></i></a>
-  <a href="#"> <i class="ti-twitter"></i> </a>
-<a href="#"><i class="ti-instagram"></i></a>
-<a href="#"><i class="ti-skype"></i></a>
-</div>
-</div>
-<div class="col-xl-2 col-sm-6 col-md-4 single-footer-widget">
-<h4>Quick Links</h4>
-<ul>
-<li><a href="index.php">About us</a></li>
-<li><a href="user.php?type=register"> SignUp</a></li>
-<li><a href="user.php">Login</a></li>
-</ul>
-</div>
 
-<div class="col-xl-3 col-sm-6 col-md-6 single-footer-widget">
-<h4>Quote</h4>
-<p>We Care About Your Health</p>
-
-</div>
-</div>
-</div>
-</div>
-<div class="copyright_part">
+<header class="main_menu home_menu">
 <div class="container">
 <div class="row align-items-center">
-<p class="footer-text m-0 col-lg-12">
-	Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved
-</p>
-<div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
-<a href="#"><i class="ti-facebook"></i></a>
-<a href="#"> <i class="ti-twitter"></i> </a>
-<a href="#"><i class="ti-instagram"></i></a>
-<a href="#"><i class="ti-skype"></i></a>
+<div class="col-lg-12">
+<nav class="navbar navbar-expand-lg navbar-light">
+<a href="index.php"> <img src="assets/img/Coronavirus-Raw-Materials.png" alt="logo"> </a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse main-menu-item justify-content-center" id="navbarSupportedContent">
+
+<ul class="navbar-nav mr-auto">
+
+<?php if (isset($_SESSION['userType'])) {
+
+  if ($_SESSION['userType'] == "Doctor") { ?>
+		<li class="nav-item active">
+			<a   href="home.php">Home</a>
+		</li>
+		<li class="nav-item active">
+		<a  href="user.php?type=logout">Logout</a>
+	</li>
+	<?php } 
+
+	 if ($_SESSION['userType'] == "Patient") { ?>
+
+		<li class="nav-item active">
+		<a  href="tests.php"> Tests</a>
+	</li>
+
+		<li class="nav-item active">
+		<a href="results.php"> Results</a>
+	</li>
+		<li class="nav-item active">
+		<a  href="user.php?type=logout"> Logout</a>
+	</li>
+	<?php } 
+
+	 if ($_SESSION['userType'] == "Admin") { ?>
+
+		<li class="nav-item active">
+			<a   href="admin.php" >View Users</a>
+		</li>
+<li class="nav-item active">
+<a   href="user.php?type=logout"> Logout</a>
+</li>
+<?php } ?>
+	
+<?php 
+
+
+
+} 
+
+else { ?>
+
+	<li class="nav-item active">
+	<a href="index.php">Home</a>
+	</li>
+
+	<li class="nav-item">
+<a href="user.php?type=register">Sign Up</a>
+</li>
+<li class="nav-item">
+<a  href="user.php">Login</a>
+</li>
+	
+<?php } ?>
+</ul>
+<!-- <ul class="navbar-nav align-items-center">
+<li class="nav-item active">
+<a href="index.html">Home</a>
+</li>
+
+
+
+<li class="nav-item">
+<a  href="login.php">Login</a>
+</li>
+<li class="nav-item">
+<a href="register.php">Signup</a>
+</li>
+<li class="nav-item">
+<a href="Contact.php">Contact</a>
+</li>
+</ul> -->
+</div>
+</nav>
 </div>
 </div>
 </div>
-</div>
-</footer>
+</header>
 </html>
