@@ -62,64 +62,68 @@ return false;
          $email = $_POST['email'];
          if($this->validatetests($CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST)){
               $this->model->insertTestData( $CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST, $email);
-$list = array (
-    array('CBC','CPR','D Dimer','S Ferritin','LDH','ALT','AST'),
-    array(''.$CBC.'', ''.$CPR.'', ''.$DDimer.'', ''.$Ferritin.'', ''.$LDH.'', ''.$ALT.'', ''.$AST.'')
-);
+           $list = array (
+            array('CBC','CPR','D Dimer','S Ferritin','LDH','ALT','AST'),
+              array(''.$CBC.'', ''.$CPR.'', ''.$DDimer.'', ''.$Ferritin.'', ''.$LDH.'', ''.$ALT.'', ''.$AST.'')
+                  );
 
-$fp = fopen(''. $email .'.csv', 'w');
+              $fp = fopen(''. $email .'.csv', 'w');
 
-foreach ($list as $fields) {
-    fputcsv($fp, $fields);
+             foreach ($list as $fields) {
+                 fputcsv($fp, $fields);
 }
 
-fclose($fp);
+            fclose($fp);
 
-}
-  else
-  {
+                   }
+               else
+                   {
   	return false;
   }
 	
 	}
 function validatetests($CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST){
-if( $CPR < 0 || $CPR > 20){
+if( $CPR < 0 || $CPR > 1000){
 	      echo"
             <script>alert('Please enter a correct value');</script>
-            <script>window.location.replace('http://localhost/Covid-4/public/tests.php');</script>
+           <script>window.location.replace('http://localhost/Covid-4/public/tests.php');</script>
             ";
-	     // header("location:tests.php");
+	      // header("location:tests.php");
      	//  alert( 'Please enter a correct value');
      	 return false;
      }
-      if ($Ferritin < 0 || $Ferritin > 400){
+      if ($Ferritin < 0 || $Ferritin > 3000){
       	echo"
             <script>alert('Please enter SFerritin in a correct value');</script>
             <script>window.location.replace('http://localhost/Covid-4/public/tests.php');</script>";
      
      	return false;
      }
-       if ($LDH < 0 || $LDH > 500){
+       if ($LDH < 0 || $LDH > 1000){
+      echo"
+            <script>alert('Please enter a correct value');</script>
+           <script>window.location.replace('http://localhost/Covid-4/public/tests.php');</script>
+            ";
+     	return false;
+     }
+      if ($ALT< 0 || $ALT > 1000){
+     	echo"
+            <script>alert('Please enter a correct value');</script>
+           <script>window.location.replace('http://localhost/Covid-4/public/tests.php');</script>
+            ";
+     	return false;
+     }
+       if ($CBC < 0 || $CBC > 4000){
       	header("location:tests.php");
      	alert( 'Please enter a correct value');
      	return false;
      }
-      if ($ALT< 0 || $ALT > 100){
-     	header("location:tests.php");
-     	alert( 'Please enter a correct value');
-     	return false;
-     }
-       if ($CBC < 0 || $CBC > 400){
+       if ($DDimer < 0 || $DDimer > 1000){
       	header("location:tests.php");
      	alert( 'Please enter a correct value');
      	return false;
      }
-       if ($DDimer < 0 || $DDimer > 20){
-      	header("location:tests.php");
-     	alert( 'Please enter a correct value');
-     	return false;
-     }
-      if ($AST < 0 || $AST > 200){
+      if ($AST < 0 || $AST > 1000){
      	header("location:tests.php");
      	alert( 'Please enter a correct value');
      	return false;
