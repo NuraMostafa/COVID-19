@@ -1,6 +1,6 @@
 
-<?php
 
+<?php
 require_once(__ROOT__ . "controller/Controller.php");
 
 class UsersController extends Controller{
@@ -11,9 +11,28 @@ class UsersController extends Controller{
 		$userType = 'Patient';
 		$gender = $_REQUEST['gender'];
 		$dateofbirth = $_REQUEST['dateofbirth'];
-
+        if($this->validatepassword($password)){
 		$this->model->insertUser($email,$password,$userName,$userType, $gender, $dateofbirth);
+		}
+      else
+     {
+return false;
+}
+    
 	}
+		 function validatepassword($password )
+    {      $passlength=strlen("$password");
+          if($passlength < 8){
+
+            echo"
+            <script>alert('Password must be more than 8 characters');</script>
+            <script>window.location.replace('http://localhost/Covid-4/public/user.php?type=register');</script>";
+           
+            return false;
+        }
+      return true;
+}
+	
 		public function addUser() {
 		$email = $_REQUEST['email'];
 		$password = $_REQUEST['password'];
@@ -41,9 +60,98 @@ class UsersController extends Controller{
          $DDimer = $_POST['DDimer'];
          $AST = $_POST['AST'];
          $email = $_POST['email'];
+         if($this->validatetests($CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST)){
+              $this->model->insertTestData( $CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST, $email);
+$list = array (
+    array('CBC','CPR','D Dimer','S Ferritin','LDH','ALT','AST'),
+    array(''.$CBC.'', ''.$CPR.'', ''.$DDimer.'', ''.$Ferritin.'', ''.$LDH.'', ''.$ALT.'', ''.$AST.'')
+);
 
-		$this->model->insertTestData( $CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST, $email);
+$fp = fopen(''. $email .'.csv', 'w');
+
+foreach ($list as $fields) {
+    fputcsv($fp, $fields);
+}
+
+fclose($fp);
+
+}
+  else
+  {
+  	return false;
+  }
+	
 	}
+function validatetests($CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST){
+if( $CPR < 0 || $CPR > 20){
+	      echo"
+            <script>alert('Please enter a correct value');</script>
+            <script>window.location.replace('http://localhost/Covid-4/public/tests.php');</script>
+            ";
+	     // header("location:tests.php");
+     	//  alert( 'Please enter a correct value');
+     	 return false;
+     }
+      if ($Ferritin < 0 || $Ferritin > 400){
+      	echo"
+            <script>alert('Please enter SFerritin in a correct value');</script>
+            <script>window.location.replace('http://localhost/Covid-4/public/tests.php');</script>";
+     
+     	return false;
+     }
+       if ($LDH < 0 || $LDH > 500){
+      	header("location:tests.php");
+     	alert( 'Please enter a correct value');
+     	return false;
+     }
+      if ($ALT< 0 || $ALT > 100){
+     	header("location:tests.php");
+     	alert( 'Please enter a correct value');
+     	return false;
+     }
+       if ($CBC < 0 || $CBC > 400){
+      	header("location:tests.php");
+     	alert( 'Please enter a correct value');
+     	return false;
+     }
+       if ($DDimer < 0 || $DDimer > 20){
+      	header("location:tests.php");
+     	alert( 'Please enter a correct value');
+     	return false;
+     }
+      if ($AST < 0 || $AST > 200){
+     	header("location:tests.php");
+     	alert( 'Please enter a correct value');
+     	return false;
+     }
+
+     else {
+     	return true;
+     }
+ }
+
+
+// 	  function validatetests($CPR )
+//     {      $passlength=strlen($CPR);
+//           if($passlength >2){
+//           	//echo "<script>href= 'tests.php?action=addTest';</script>";
+            
+//              //  header("location:tests.php");
+//              //   // echo "<script>('incorrect');</script>";
+
+
+//              // alert('test'); 
+
+//              echo "<script>";
+// echo "alert('You are logged out');";
+//  header("location:tests.php"); 
+// echo "</script>";
+            
+//            
+//         }
+//   // throw new Exception ("Invalid password !!");
+//       return true;
+// }
 
 	public function edit() {
 		$email = $_REQUEST['email'];
@@ -102,4 +210,8 @@ class UsersController extends Controller{
 	
 }
 ?>
+
+
+
+
 
