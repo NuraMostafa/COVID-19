@@ -1,11 +1,11 @@
-# keras imports for the dataset and building our neural network
 import keras
 from keras.datasets import mnist
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Conv2D, MaxPool2D, Flatten
-from keras.utils import np_utils
-from keras.preprocessing.image import ImageDataGenerator
 from keras.optimizers import Adam
+from PIL import Image
+
+
 
 
 import tensorflow as tf
@@ -28,10 +28,7 @@ noncovidtrain = 0
 for x in range(486):
     if x % 2 == 0:
         imgcovid = os.listdir("D:/Graduation project/srs-20210710T173116Z-001/srs/covidtrain")
-        # print(imgcovid[0])
         img = cv2.imread("D:/Graduation project/srs-20210710T173116Z-001/srs/covidtrain/" + imgcovid[covidtrain])
-        # print(img)
-        # print("image")
         train_Covid[covidtrain] = cv2.resize(img, (224, 224))
         train_images[x] = cv2.resize(img, (224, 224))
         train_labels[x] = 1
@@ -84,21 +81,7 @@ for z in range(206):
         test_labels[z] = 0
         noncovidtest = noncovidtest + 1
 
-# datagen = ImageDataGenerator(
-#         featurewise_center=False,  # set input mean to 0 over the dataset
-#         samplewise_center=False,  # set each sample mean to 0
-#         featurewise_std_normalization=False,  # divide inputs by std of the dataset
-#         samplewise_std_normalization=False,  # divide each input by its std
-#         zca_whitening=False,  # apply ZCA whitening
-#         rotation_range = 30,  # randomly rotate images in the range (degrees, 0 to 180)
-#         zoom_range = 0.2, # Randomly zoom image
-#         width_shift_range=0.1,  # randomly shift images horizontally (fraction of total width)
-#         height_shift_range=0.1,  # randomly shift images vertically (fraction of total height)
-#         horizontal_flip = True,  # randomly flip images
-#         vertical_flip=False)  # randomly flip images
 
-
-# datagen.fit(train_Covid)
 
 
 model = Sequential()
@@ -126,29 +109,26 @@ results1 = model.evaluate(test_images, test_labels, batch_size=32)
 
 predictions = model.predict_classes(test_images)
 print(predictions)
+# print(classification_report(test_labels, predictions, target_names = ['Covid (Class 1)','Non-Covid (Class 0)']))
+# max_predictions = tf.argmax(predictions, axis=1)
 print(tf.math.confusion_matrix(labels=test_labels, predictions=predictions))
-# TensorFlow and tf.keras
-import tensorflow as tf
+#######################################################
 
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
 from tensorflow.keras.preprocessing import image
 
 # Helper libraries
 import numpy as np
-import matplotlib.pyplot as plt
 
 
-def classify(test_images):
-    img = image.load_img(test_images, target_size=(224, 224))
+def classify(noranxx):
+    img = image.load_img(noranxx, target_size=(224, 224))
     img_array = image.img_to_array(img)
     img_batch = np.expand_dims(img_array, axis=0)
     img_preprocessed = preprocess_input(img_batch)
     prediction = model.predict(img_preprocessed)
     print(prediction)
-    # result=np.max(prediction)
     result = np.argmax(prediction, axis=1)
-    # result= img_array.index(np.max(prediction))
-    # result=prediction.index(max(prediction))
     print(result)
 
     # print(result)
@@ -159,6 +139,7 @@ def classify(test_images):
         print("Negative")
 
 
+# classify("/content/images.jfif")
 
 # def returnstring(result):
 #     if 0.6 <= result <= 1.0:
