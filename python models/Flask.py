@@ -1,22 +1,26 @@
 from flask import Flask, jsonify, request, flash
 from werkzeug.utils import secure_filename
 from cnnct import classify
+from pneumonia import classifypneumonia
+from SVM import classifytests
 app = Flask(__name__)
 
 
-@app.route('/uploadText', methods=['POST'])
-def uploadText():
-    text = request.form['mytext']
-    print(text)
-    return text
+# @app.route('/uploadText', methods=['POST'])
+# def uploadText():
+#     text = request.files['csvfile']
+#     predicttests=classifytests(text)
+#     return predicttests
 
 
 @app.route('/uploadImage', methods=['POST'])
 def upload_file():
-    file = request.files['file']
+    file = request.files['image']
     route = "rgb_img.jpg"
     file.save(route)
-    return 'recieved'
+    predictresult=classify(route)
+    return (predictresult)
+   # return render_template('home.html')
 
 
 @app.route('/uploadVideo', methods=['POST'])
