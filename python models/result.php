@@ -1,3 +1,38 @@
+<?php
+session_start();
+// define('__ROOT__', "../app/");
+
+
+try {
+    if (file_exists("error.log")) {
+        ini_set('error_log', 'error.log');
+    } else {
+        throw new Exception("Error logs file not found, creating one");
+    }
+} catch (Exception $e) {
+    $file = fopen("error.log", "w");
+    ini_set('error_log', 'error.log');
+    error_log($e->getMessage() . " in " . $e->getFile());
+}
+date_default_timezone_set("Africa/Cairo");
+
+$connection = mysqli_connect('localhost', 'root', '');
+if (!$connection){
+    die("Database Connection Failed" . mysqli_error($connection));
+}
+$select_db = mysqli_select_db($connection, 'covid');
+if (!$select_db){
+    die("Database Selection Failed" . mysqli_error($connection));
+}
+
+
+if(!isset($_SESSION['userType']) || $_SESSION['userType'] == 'Admin'){
+  header('Location: index.php');
+}
+
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -6196,6 +6231,826 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 576px) {
   /* line 18, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_breadcrumb.scss */
+  .breadcrumb_part .breadcrumb_iner .breadcrumb_iner_item h2 {
+    font-size: 35px;
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  /* line 18, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_breadcrumb.scss */
+  .breadcrumb_part .breadcrumb_iner .breadcrumb_iner_item h2 {
+    font-size: 35px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  /* line 18, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_breadcrumb.scss */
+  .breadcrumb_part .breadcrumb_iner .breadcrumb_iner_item h2 {
+    font-size: 40px;
+  }
+}
+
+/* line 39, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_breadcrumb.scss */
+.breadcrumb_part .breadcrumb_iner .breadcrumb_iner_item p {
+  font-size: 15px;
+  color: #fff;
+  text-transform: capitalize;
+}
+
+/* line 45, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_breadcrumb.scss */
+.breadcrumb_part .breadcrumb_iner .breadcrumb_iner_item span {
+  margin: 0px 5px;
+  font-size: 12px;
+}
+
+/* line 55, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_breadcrumb.scss */
+.breadcrumb {
+  margin-bottom: 0px !important;
+}
+
+/* line 2, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area {
+  background-color: #f3f6f7;
+}
+
+@media (max-width: 991px) {
+  /* line 5, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+  .footer-area .single-footer-widget {
+    margin-bottom: 30px;
+  }
+}
+
+/* line 10, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .single-footer-widget p {
+  color: #7b838a;
+}
+
+/* line 14, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .single-footer-widget h4 {
+  color: #242429;
+  font-style: inherit;
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+@media (max-width: 1024px) {
+  /* line 14, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+  .footer-area .single-footer-widget h4 {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 991px) {
+  /* line 14, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+  .footer-area .single-footer-widget h4 {
+    margin-bottom: 15px;
+  }
+}
+
+/* line 31, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .single-footer-widget ul li {
+  margin-bottom: 14px;
+}
+
+/* line 34, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .single-footer-widget ul li a {
+  color: #7f7f7f;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+/* line 38, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .single-footer-widget ul li a:hover {
+  color: #0065e1;
+}
+
+/* line 45, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .single-footer-widget .form-wrap {
+  margin-top: 25px;
+  position: relative;
+}
+
+/* line 50, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .single-footer-widget input {
+  height: 48px;
+  border: none;
+  width: 100% !important;
+  font-weight: 400;
+  background: transparent;
+  padding-left: 20px;
+  border-radius: 0;
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid #e1e1e1 !important;
+  color: #999999;
+}
+
+/* line 64, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .single-footer-widget input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* line 75, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .single-footer-widget .click-btn {
+  background-color: #0065e1;
+  color: #fff;
+  border-radius: 5px;
+  border: 0;
+  position: absolute;
+  right: 5px;
+  width: 40px;
+  height: 40px;
+  line-height: 30px;
+  text-align: center;
+  display: inline-block;
+}
+
+/* line 87, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .single-footer-widget .click-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* line 93, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .footer_logo {
+  margin-bottom: 30px;
+  display: inline-block;
+}
+
+/* line 97, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .social_logo {
+  margin-top: 20px;
+}
+
+/* line 100, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .social_logo a {
+  color: #b8bcbf;
+  margin-right: 10px;
+}
+
+/* line 103, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .social_logo a:hover {
+  color: #0065e1;
+}
+
+/* line 108, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .footer-bottom {
+  margin-top: 70px;
+}
+
+@media (max-width: 991px) {
+  /* line 108, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+  .footer-area .footer-bottom {
+    margin-top: 20px;
+  }
+}
+
+/* line 126, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .footer-bottom .footer-social {
+  text-align: center;
+}
+
+@media (max-width: 991px) {
+  /* line 126, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+  .footer-area .footer-bottom .footer-social {
+    text-align: left;
+    margin-top: 30px;
+  }
+}
+
+/* line 134, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .footer-bottom .footer-social a {
+  background: rgba(255, 255, 255, 0.15);
+  margin-left: 3px;
+  width: 32px;
+  display: inline-grid;
+  text-align: center;
+  height: 32px;
+  align-content: center;
+}
+
+/* line 150, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .footer-bottom .footer-social a i,
+.footer-area .footer-bottom .footer-social a span {
+  font-size: 14px;
+}
+
+/* line 158, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .copyright_part {
+  background-color: #0d1820;
+  padding: 26px 0px;
+}
+
+/* line 162, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .copyright_part a {
+  color: #0065e1;
+}
+
+@media (max-width: 576px) {
+  /* line 166, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+  .footer-area .copyright_part .footer-social {
+    margin-top: 20px;
+  }
+}
+
+/* line 177, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .copyright_part .footer-social a {
+  margin-left: 20px;
+  color: #fff;
+  text-align: center;
+}
+
+/* line 182, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .copyright_part .footer-social a:hover {
+  color: #0065e1;
+}
+
+/* line 187, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .copyright_part .footer-social a i:hover {
+  color: #0065e1;
+}
+
+/* line 192, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+.footer-area .copyright_part .footer-social a [class^="ti-"],
+.footer-area .copyright_part .footer-social a [class*=" ti-"] {
+  line-height: 0;
+}
+
+@media (max-width: 991px) {
+  /* line 200, ../../01 cl html template/03_jun 2019/182_medico_html/sass/_footer.scss */
+  .footer-area .copyright_part .footer-text {
+    text-align: center;
+  }
+}
+
+
+
+
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+html.open, body.open {
+  height: 100%;
+  overflow: hidden;
+}
+
+html {
+  padding: 40px;
+  font-size: 62.5%;
+}
+
+body {
+  padding: 20px;
+  background-color: #ffffff;
+  background-image: url('images.png');
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  color: #fff;
+  font-size: 1.6rem;
+  font-family: 'Lato', sans-serif;
+}
+
+p {
+  text-align: center;
+  margin: 20px 0 60px;
+}
+
+main {
+  background-color: #d6f4ff;
+}
+
+h1 {
+  /*text-align: center;*/
+  font-weight: 500;
+
+}
+
+table {
+  display: block;
+}
+
+tr, td, tbody, tfoot {
+  display: block;
+}
+
+thead {
+  display: none;
+}
+
+tr {
+  padding-bottom: 10px;
+}
+
+td {
+  padding: 10px 10px 0;
+  text-align: center;
+}
+td:before {
+  content: attr(data-title);
+  color: #0000;
+  text-transform: uppercase;
+  font-size: 1.4rem;
+  padding-right: 10px;
+  display: block;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  text-align: left;
+  font-weight: 700;
+}
+
+thead th {
+  background-color: #79acf2;
+  color: #000000;
+  border: 1px solid #79acf2;
+}
+
+tfoot th {
+  display: block;
+  padding: 10px;
+  text-align: center;
+  color: #79acf2;
+}
+
+.button {
+  line-height: 1;
+  display: inline-block;
+  font-size: 1.2rem;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #ffffff;
+  padding: 8px;
+  background-color: #133a70;
+}
+
+.select {
+  padding-bottom: 20px;
+  border-bottom: 1px solid  #888fff;
+
+}
+.select:before {
+  display: none;
+}
+
+.detail {
+  background-color: #dbeaff;
+  width: 100%;
+  height: 100%;
+  padding: 40px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: auto;
+  -moz-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -moz-transition: -moz-transform 0.3s ease-out;
+  -o-transition: -o-transform 0.3s ease-out;
+  -webkit-transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
+}
+.detail.open {
+  -moz-transform: translateX(0);
+  -ms-transform: translateX(0);
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}
+
+.detail-container {
+  margin: 0 auto;
+  padding: 40px;
+  max-width: 500px;
+}
+
+dl {
+  margin: 0;
+  padding: 0;
+}
+
+dt {
+  font-size: 2.2rem;
+  font-weight: 300;
+}
+
+dd {
+  margin: 0 0 40px 0;
+  font-size: 1.8rem;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #000000;
+  box-shadow: 0 1px 0 #c52c51;
+}
+
+.close {
+  background: none;
+  padding: 18px;
+  color: #ffff;
+  font-weight: 300;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  line-height: 1;
+  font-size: 1.8rem;
+  position: fixed;
+  right: 40px;
+  top: 20px;
+  -moz-transition: border 0.3s linear;
+  -o-transition: border 0.3s linear;
+  -webkit-transition: border 0.3s linear;
+  transition: border 0.3s linear;
+}
+.close:hover, .close:focus {
+  background-color: #000000;
+  border: 1px solid #000000;
+}
+
+@media (min-width: 460px) {
+  td {
+    text-align: left;
+  }
+  td:before {
+    display: inline-block;
+    text-align: right;
+    width: 140px;
+  }
+
+  .select {
+    padding-left: 160px;
+
+  }
+}
+@media (min-width: 720px) {
+  table {
+    display: table;
+  }
+
+  tr {
+    display: table-row;
+  }
+
+  td, th {
+    display: table-cell;
+  }
+
+  tbody {
+    display: table-row-group;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tfoot {
+    display: table-footer-group;
+  }
+%khat fel nos
+  td {
+    border: 1px solid #79acf2;
+  }
+  td:before {
+    display: none;
+  }
+
+  td, th {
+    padding: 10px;
+  }
+
+  tr:nth-child(2n+2) td {
+    background-color: #79acf2;
+  }
+
+  tfoot th {
+    display: table-cell;
+  }
+
+  .select {
+    padding: 10px;
+
+  }
+}
+
+
+
+
+/*# sourceMappingURL=style.css.map */
+
+
+
+  </style>
+
+</head>
+
+<body>
+  <?php
+require_once("../app/db/dbh.php");
+?>
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1 , shrink-to-fit=no">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<title>COVID</title>
+<link rel="icon" href="assets/img/favicon.png">
+
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="assets/css/animate.css">
+
+<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+
+<link rel="stylesheet" href="assets/css/themify-icons.css">
+
+<link rel="stylesheet" href="assets/css/flaticon.css">
+
+<link rel="stylesheet" href="assets/css/magnific-popup.css">
+
+<link rel="stylesheet" href="assets/css/nice-select.css">
+
+<link rel="stylesheet" href="assets/css/slick.css">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  a {
+    color: #2554C7;
+    margin-right: 60px;
+    font-size: 100;
+    width: 200px;
+
+  }
+</style>
+</head>
+<body>
+
+<header class="main_menu home_menu">
+<div class="container">
+<div class="row align-items-center">
+<div class="col-lg-12">
+<nav class="navbar navbar-expand-lg navbar-light">
+<a href="index.php"> <img src="assets/img/Coronavirus-Raw-Materials.png" alt="logo"> </a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse main-menu-item justify-content-center" id="navbarSupportedContent">
+
+<ul class="navbar-nav mr-auto">
+
+<?php if (isset($_SESSION['userType'])) {
+
+  if ($_SESSION['userType'] == "Doctor") { ?>
+    <li class="nav-item active">
+      <a   href="index.php">Home</a>
+    </li>
+    <li class="nav-item active">
+    <a  href="user.php?type=logout">Logout</a>
+  </li>
+  <?php }
+
+   if ($_SESSION['userType'] == "Patient") { ?>
+
+    <li class="nav-item active">
+    <a  href="tests.php"> Tests</a>
+  </li>
+
+
+    <li class="nav-item active">
+    <a  href="user.php?type=logout"> Logout</a>
+  </li>
+  <?php }
+
+   if ($_SESSION['userType'] == "Admin") { ?>
+
+    <li class="nav-item active">
+      <a   href="admin.php" >View Users</a>
+    </li>
+<li class="nav-item active">
+<a   href="user.php?type=logout"> Logout</a>
+</li>
+<?php } ?>
+
+<?php
+
+
+
+}
+
+else { ?>
+
+  <li class="nav-item active">
+  <a href="index.php">Home</a>
+  </li>
+
+  <li class="nav-item">
+<a href="user.php?type=register">Sign Up</a>
+</li>
+<li class="nav-item">
+<a  href="user.php">Login</a>
+</li>
+
+<?php } ?>
+</ul>
+<!-- <ul class="navbar-nav align-items-center">
+<li class="nav-item active">
+<a href="index.html">Home</a>
+</li>
+
+
+
+<li class="nav-item">
+<a  href="login.php">Login</a>
+</li>
+<li class="nav-item">
+<a href="register.php">Signup</a>
+</li>
+<li class="nav-item">
+<a href="Contact.php">Contact</a>
+</li>
+</ul> -->
+</div>
+</nav>
+</div>
+</div>
+</div>
+</header>
+
+
+
+<section class="about_us padding_top">
+<div class="container">
+  <div class="row justify-content-between">
+    <div class="col-lg">
+      <div class="regervation_part_iner" style="display: inline-block;">
+        <div class="form-row">
+
+            <br><br>
+        <h1 >Results</h1>
+        <br>
+        <div class="form-group col-lg-12">
+            <div class="row" id="old">
+                <table>
+                  <tr style="background-color: #4169E1;">
+                    <th>Email</th>
+
+                    <th>Status</th>
+
+                  </tr>
+                    <tr>
+
+  <?php
+        $uid = $_SESSION['id'];
+        $sql = "SELECT * FROM `tests` WHERE uid = '$uid'";
+        $result = mysqli_query($connection, $sql);
+        $count = mysqli_num_rows($result);
+        if ($count > 0) {
+            while ($rows = mysqli_fetch_array($result)) {
+                ?>
+                    <td><?php echo $rows[8]; ?></td>
+                    <td>{{myresult}}</td>
+
+
+                </tr>
+                <?php
+            }
+            ?>
+
+            <?php
+
+        } else {
+
+            echo "No data to view";
+
+        }
+
+        ?>
+
+
+            }
+            </table>
+                    <br> <br>
+
+                        </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+</section>
+<!-- <script src="assets/js/jquery-3.4.1.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/wow.min.js"></script>
+<script src="assets/js/owl.carousel.js"></script>
+<script src="assets/js/main.js"></script> -->
+<?php
+
+require_once("../app/db/dbh.php");
+?>
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>COVID</title>
+<link rel="icon" href="assets/img/favicon.png">
+
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+<link rel="stylesheet" href="assets/css/animate.css">
+
+<link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+
+<link rel="stylesheet" href="assets/css/themify-icons.css">
+
+<link rel="stylesheet" href="assets/css/flaticon.css">
+
+<link rel="stylesheet" href="assets/css/magnific-popup.css">
+
+<link rel="stylesheet" href="assets/css/nice-select.css">
+
+<link rel="stylesheet" href="assets/css/slick.css">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+  a {
+    color: #2554C7;
+    margin-right: 60px;
+    font-size: 100;
+    width: 200px;
+
+  }
+</style>
+</head>
+<body>
+<footer class="footer-area">
+<div class="footer section_padding">
+<div class="container">
+<div class="row justify-content-between">
+<div class="col-xl-2 col-md-4 col-sm-6 single-footer-widget">
+<a href="#" class="footer_logo"> <img src="assets/img/Coronavirus-Raw-Materials.png" alt="#"> </a>
+<p>COVID-19 is an infectious disease that mainly affects lungs. Pneumonia is also an infection that causes inflammation in the air sacs in lungs. </p>
+<div class="social_logo">
+<a href="#"><i class="ti-facebook"></i></a>
+  <a href="#"> <i class="ti-twitter"></i> </a>
+<a href="#"><i class="ti-instagram"></i></a>
+<a href="#"><i class="ti-skype"></i></a>
+</div>
+</div>
+<div class="col-xl-2 col-sm-6 col-md-4 single-footer-widget">
+<h4>Quick Links</h4>
+<ul>
+<li><a href="index.php">About us</a></li>
+<li><a href="user.php?type=register"> SignUp</a></li>
+<li><a href="user.php">Login</a></li>
+</ul>
+</div>
+
+<div class="col-xl-3 col-sm-6 col-md-6 single-footer-widget">
+<h4>Quote</h4>
+<p>We Care About Your Health</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="copyright_part">
+<div class="container">
+<div class="row align-items-center">
+<p class="footer-text m-0 col-lg-12">
+  Copyright &copy; <script>document.write(new Date().getFullYear());</script> All rights reserved
+</p>
+<div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
+<a href="#"><i class="ti-facebook"></i></a>
+<a href="#"> <i class="ti-twitter"></i> </a>
+<a href="#"><i class="ti-instagram"></i></a>
+<a href="#"><i class="ti-skype"></i></a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</html>
+<script>
+    new WOW().init();
+</script>
+
+</body>
+</html>
+s */
   .breadcrumb_part .breadcrumb_iner .breadcrumb_iner_item h2 {
     font-size: 35px;
   }
