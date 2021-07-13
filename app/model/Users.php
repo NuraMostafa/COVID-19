@@ -53,7 +53,8 @@ class Users extends Model {
 		}
 	}
 	function insertPatient( $userName, $email, $gender, $dateofbirth){
-		$sql = "INSERT INTO patients ( Username, email, Gender, dateofbirth) VALUES ('$userName', '$email', '$gender', '$dateofbirth')";
+		$did = $_SESSION["id"];
+		$sql = "INSERT INTO patients ( Username, email, Gender, dateofbirth, doctorID) VALUES ('$userName', '$email', '$gender', '$dateofbirth', '$did')";
 		if($this->db->query($sql) === true){
 			
 			$this->fillArray();
@@ -65,8 +66,12 @@ class Users extends Model {
 
 	
 		function insertTestData( $CPR, $Ferritin, $LDH, $ALT, $CBC, $DDimer, $AST, $email){
-		$sql = "INSERT INTO tests ( CPR, Ferritin, LDH, ALT, CBC, DDimer, AST, email) VALUES ('$CPR', '$Ferritin', '$LDH', '$ALT', '$CBC', '$DDimer', '$AST', '$email')";
-		if($CPR >= 12)
+		
+		$uid = $_SESSION['id'];
+		$sql = "INSERT INTO tests ( CPR, Ferritin, LDH, ALT, CBC, DDimer, AST, email, uid) VALUES ('$CPR', '$Ferritin', '$LDH', '$ALT', '$CBC', '$DDimer', '$AST', '$email', '$uid')";
+	
+
+		
 		if($this->db->query($sql) === true){
 			
 			$this->fillArray();
@@ -104,8 +109,12 @@ class Users extends Model {
 	function fillpatientsArray() {
 		$this->patients = array();
 		$this->db = $this->connect();
-		$result = $this->readPatients();
-		while ($row = $result->fetch_assoc()) {
+		if(isset($_SESSION['userType']) && $_SESSION['userType'] == 'Doctor'){
+			$result = $this->readPatients();
+		}else{
+			$result = $this->readAllPatients();
+		}
+		while ($row = mysqli_fetch_assoc($result)) {
 			array_push($this->patients, new User($row["id"],$row["email"],'$row["Password"]',$row["Username"],'$row["User_type"]',$row["Gender"],$row["dateofbirth"]));
 		}
 	}
@@ -114,6 +123,32 @@ class Users extends Model {
 	}
 
 	function readPatients(){
+		if(isset($_SESSION["id"])){
+			$did = $_SESSION["id"];
+			$sql = "SELECT * FROM patients WHERE doctorID = '$did'";
+
+			$result = $this->db->query($sql);
+			if ($result->num_rows > 0){
+				return $result;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			$sql = "SELECT * FROM patients";
+
+			$result = $this->db->query($sql);
+			if ($result->num_rows > 0){
+				return $result;
+			}
+			else {
+				return false;
+			}
+		}
+		
+	}
+		function readAllPatients(){
 
 		$sql = "SELECT * FROM patients ";
 
@@ -127,14 +162,16 @@ class Users extends Model {
 	}
 
 
+
 		function getSearchpatients($searchKey){
 		$searchResult = array();
-		$this->db = $this->connect();
+		//$this->db = $this->connect();
 		$sql = "SELECT * FROM patients WHERE id LIKE '%$searchKey%' OR Username LIKE '%$searchKey%' OR Gender LIKE '%$searchKey%'";
 		$result = $this->db->query($sql);
 		if ($result->num_rows > 0){
 			while ($row = $result->fetch_assoc()) {
-				array_push($searchResult, new User($row["id"],$row["Username"],$row["email"],$row["Gender"],$row["dateofbirth"]));
+				array_push($searchResult, new User($row["id"],$row["email"],'',$row["Username"],'',$row["Gender"],$row["dateofbirth"]));
+				//array_push($searchResult, new User($row["id"],$row["Username"],$row["email"],$row["Gender"],$row["dateofbirth"]));
 			}
 		}
 		return $searchResult;
