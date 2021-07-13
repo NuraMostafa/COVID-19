@@ -12,9 +12,10 @@ class User extends Model {
     private $gender;
     private $dateofbirth;
 
-  function __construct($id, $email = "", $password="", $userName="", $userType="",$gender="",$dateofbirth="") {
+ function __construct($id, $email = "", $password="", $userName="", $userType="",$gender="",$dateofbirth="") {
     $this->id = $id;
     $this->db = $this->connect();
+
     if(empty($email) && ($_SESSION['userType'] =='Admin' || $_SESSION['userType'] == 'Patient')){
       $this->readUser($id);
     } elseif(empty($email) && $_SESSION['userType'] == 'Doctor'){
