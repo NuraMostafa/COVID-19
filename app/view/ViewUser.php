@@ -265,23 +265,23 @@ return $str;
 
      
 	}
-		public function viewResult($userData){
-		$str='
-		<div class="card">
-  <img width:15000px; src="assets/img/Profilep.png" style="width:70%">
-  <h1>'.$userData->getUserName().'</h1>
-  <p class="title">'.$userData->getEmail().'</p>
-  <p class="title">'.$userData->getGender().'</p>
-  <p class="title">'.$userData->getDateOfBirth().'</p>
-  <a><i class="fa fa-id-badge">'.$userData->getID().'</i></a>
-  <a href="edituser.php?userID='.$userData->getID().'"> Edit </a>
-  <a href="profile.php?action=deleteUser&userID='.$userData->getID().'" style=" display: inline-block;""> Delete </a>
+// 		public function viewResult($userData){
+// 		$str='
+// 		<div class="card">
+//   <img width:15000px; src="assets/img/Profilep.png" style="width:70%">
+//   <h1>'.$userData->getUserName().'</h1>
+//   <p class="title">'.$userData->getEmail().'</p>
+//   <p class="title">'.$userData->getGender().'</p>
+//   <p class="title">'.$userData->getDateOfBirth().'</p>
+//   <a><i class="fa fa-id-badge">'.$userData->getID().'</i></a>
+//   <a href="edituser.php?userID='.$userData->getID().'"> Edit </a>
+//   <a href="profile.php?action=deleteUser&userID='.$userData->getID().'" style=" display: inline-block;""> Delete </a>
   
-   </div>'
-;
+//    </div>'
+// ;
 		
-        return $str;	
-	}
+//         return $str;	
+// 	}
 
 
 
@@ -380,6 +380,7 @@ $str = ' <div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
       return true;
 }
 
+
 function testsform(){
 $str=' <div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 <form method="POST" action="http://192.168.1.4:5000/uploadImage" enctype="multipart/form-data" style="   max-width: 100%; margin: 0 auto;  
@@ -394,7 +395,7 @@ $str=' <div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 <div class="regerv_btn"><button type="submit" name="save" class="btn_2" style="width: 200px;">Submit</button></div>
 </div>
 </form>
-<form method="POST"  action="http://192.168.1.4:5000/uploadText"  enctype="multipart/form-data" style="   max-width: 100%;
+<form method="POST"  action="http://192.168.1.4:5000s/uploadText"  enctype="multipart/form-data" style="   max-width: 100%;
 margin: 0 auto;  
 display: block;">
 <div class= "input-container">
