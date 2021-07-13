@@ -60,7 +60,7 @@ require_once("../app/db/dbh.php");
 
   if ($_SESSION['userType'] == "Doctor") { ?>
 		<li class="nav-item active">
-			<a   href="home.php">Home</a>
+			<a   href="index.php">Home</a>
 		</li>
 		<li class="nav-item active">
 		<a  href="user.php?type=logout">Logout</a>
@@ -73,9 +73,7 @@ require_once("../app/db/dbh.php");
 		<a  href="tests.php"> Tests</a>
 	</li>
 
-		<li class="nav-item active">
-		<a href="results.php"> Results</a>
-	</li>
+
 		<li class="nav-item active">
 		<a  href="user.php?type=logout"> Logout</a>
 	</li>
