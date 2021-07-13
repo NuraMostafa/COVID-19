@@ -8,20 +8,28 @@ require_once(__ROOT__ . "view/ViewUser.php");
 $model = new Users();
 $controller = new UsersController($model);
 $view = new ViewUser($controller, $model);
-$patientData = array();
-$editPagepData = '';
-
-if(!isset($_SESSION['userType']) || $_SESSION['userType'] != 'Doctor'){
-  header('Location: index.php');
+$userData = array();
+$editPageData = '';
+if ($_SESSION['userType'] == 'Admin'){
+if(isset($_POST['save'] )){
+    $userData = new User($_GET['userID']);
+    $userData->editUser();
+    header("Location: admin.php");
+  }}
+  else if(isset($_GET['userID']) && !empty($_GET['userID'])){
+    $userData = new User($_GET['userID']);
+    $editPageData = $view->viewEditUserData($userData);
 }
+if ($_SESSION['userType'] == 'Patient'){
+   if(isset($_POST['save'] )){
+    $userData = new User($_GET['userID']);
+    $userData->editUser();
+    header("Location: profile.php");
 
-if(isset($_POST['save2'])){
-    $patientData = new User($_GET['patientID']);
-    $patientData->editPatient();
-    header("Location: doctor.php");
-}else if(isset($_GET['patientID']) && !empty($_GET['patientID'])){
-    $patientData = new User($_GET['patientID']);
-    $editPagepData = $view->viewEditUPatientData($patientData);
+}
+}else if(isset($_GET['userID']) && !empty($_GET['userID'])){
+    $userData = new User($_GET['userID']);
+    $editPageData = $view->viewEditUserData($userData);
 }
 ?>
 
@@ -32,7 +40,7 @@ if(isset($_POST['save2'])){
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Edit Patients</title>
+    <title>Edit User</title>
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
@@ -65,11 +73,11 @@ if(isset($_POST['save2'])){
 <div class="container">
   <div class="row justify-content-between">
     <div class="col-lg">
-    <br><h1 style="margin: 0 auto; width:250px;">Edit Patients</h1><br>
+    <br><h1 style="margin: 0 auto; width:250px;">Edit users</h1><br>
       <div class="regervation_part_iner" style="display: inline-block;">
         <div class="form-row">
           
-            <?php echo  $editPagepData; ?>
+            <?php echo  $editPageData; ?>
             
         </div>
       </div>
