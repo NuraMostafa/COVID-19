@@ -1,10 +1,11 @@
-from flask import Flask, jsonify, request, flash
+from flask import Flask, jsonify, request, flash, render_template
 from werkzeug.utils import secure_filename
 from cnnct import classify
 from pneumonia import classifypneumonia
 from SVM import classifytests
 import csv
-app = Flask(__name__)
+from jinja2 import Template
+app = Flask(__name__,template_folder='templates')
 
 
 @app.route('/uploadText', methods=['POST'])
@@ -23,7 +24,22 @@ def uploadText():
         writer.writerow(header)
         writer.writerow(data)
     predicttests=classifytests('bloodtests.csv')
-    return predicttests
+    return render_template('result.php', myresult=predicttests)
+
+
+# import csv
+#
+# header = ['name', 'area', 'country_code2', 'country_code3']
+# data = ['Afghanistan', 652090, 'AF', 'AFG']
+#
+# with open('countries.csv', 'w', encoding='UTF8') as f:
+#     writer = csv.writer(f)
+#
+#     # write the header
+#     writer.writerow(header)
+#
+#     # write the data
+#     writer.writerow(data)
 
 
 @app.route('/uploadImage', methods=['POST'])
@@ -34,10 +50,10 @@ def upload_file():
     predictresult=classify(route)
     predictresult2=classifypneumonia(route)
     if predictresult =="Positive Covid":
-        return predictresult
+        return render_template('result.php', myresult=predictresult)
     else:
-        return predictresult2
-   # return render_template('home.html')
+        return render_template('result.php', myresult=predictresult2)
+
 
 
 @app.route('/uploadVideo', methods=['POST'])
@@ -45,6 +61,7 @@ def uploadVideo():
     file = request.files['file']
     route = "video.mp4"
     file.save(route)
+
     return 'recieved'
 
 
@@ -64,6 +81,11 @@ def uploadImages():
         file = request.files[fileName]
         file.save("images/" + fileName + ".jpg")
     return 'recieved'
+
+
+
+
+
 
 
 if __name__ == "__main__":
