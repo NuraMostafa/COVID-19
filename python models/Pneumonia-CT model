@@ -1,177 +1,136 @@
-import cv2
-import openpyxl
-from tqdm import tqdm
-import random
+import keras
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Conv2D, MaxPool2D, Flatten
+
+from keras.optimizers import Adam
+
+
 import tensorflow as tf
-import tensorflow.compat.v1 as tf
-import pandas as pd
-from keras.preprocessing.image import ImageDataGenerator 
-from keras.models import Sequential 
-from keras.layers import Conv2D, MaxPooling2D 
-from keras.layers import Activation, Dropout, Flatten, Dense 
-from keras import backend as K 
-import numpy as np
-import os
-import numpy as np
-import os
-import matplotlib.pyplot as plt
-import openpyxl
-from tqdm import tqdm
-import random
-import tensorflow as tf
-import tensorflow.compat.v1 as tf
-import pandas as pd
-from keras.preprocessing.image import ImageDataGenerator 
-from keras.models import Sequential 
-from keras.layers import Conv2D, MaxPooling2D 
-from keras.layers import Activation, Dropout, Flatten, Dense 
-from keras import backend as K 
-import csv
-import matplotlib.pyplot as plt
-from skimage import data
-from skimage.color import rgb2gray
-from PIL import Image, ImageOps
 from PIL import Image
-import cv2 as cv
+
+import cv2
+import os
+
+import numpy as np
 
 img_width, img_height = 224, 224
+train_images = np.zeros((486, img_width, img_height, 3), dtype='uint8')
+train_labels = np.zeros((486, 1), dtype='uint8')
 
-if K.image_data_format() == 'channels_first': 
-  input_shape = (3, img_width, img_height) 
-else: 
-  input_shape = (img_width, img_height, 3) 
+train_Covid = np.zeros((243, img_width, img_height, 3), dtype='uint8')
+train_Non_Covid = np.zeros((243, img_width, img_height, 3), dtype='uint8')
 
+covidtrain = 0
+noncovidtrain = 0
 
-#covidtesting part
-read_folder_name = "/content/drive/MyDrive/Dataset/CT_COVID"
-with open('covidtest.csv', mode='w') as file:
-      writer = csv.writer(file)
-      x=(int)(349*0.3)  
-      for j in range(x):
-        imagecovidtest = os.listdir(read_folder_name )[j]
-        writer.writerow([imagecovidtest,"1"])
+for x in range(486):
+    if x % 2 == 0:
+        imgcovid = os.listdir("D:/Graduation project/srs-20210710T173116Z-001/srs/noncovidtrain")
+        img = cv2.imread("D:/Graduation project/srs-20210710T173116Z-001/srs/noncovidtrain/" + imgcovid[covidtrain])
 
-#print(namecolumns1)
+        train_Covid[covidtrain] = cv2.resize(img, (224, 224))
+        train_images[x] = cv2.resize(img, (224, 224))
+        train_labels[x] = 1
+        covidtrain = covidtrain + 1
 
-#covidtranning part
-      
-read_folder_name1 = "/content/drive/MyDrive/Dataset/CT_COVID"
+    else:
+        imgnoncovid = os.listdir("D:/Graduation project/srs-20210710T173116Z-001/srs/covidtrain")
+        img = cv2.imread("D:/Graduation project/srs-20210710T173116Z-001/srs/covidtrain/" + imgnoncovid[noncovidtrain])
+        img = cv2.medianBlur(img, 3)
 
-with open('covidtrain.csv', mode='w') as file:
-
-    writer = csv.writer(file)
-
-    n=(int)(349*0.3)
-    y=349
-    for j in range(y):
-      while j>n:
-        imagecovidtrain = os.listdir(read_folder_name )[j]
-        writer.writerow([imagecovidtrain,"1"])
-        break 
-
-#print(namecolumns1)
+        train_Non_Covid[noncovidtrain] = cv2.resize(img, (224, 224))
+        train_images[x] = cv2.resize(img, (224, 224))
+        train_labels[x] = 0
+        noncovidtrain = noncovidtrain + 1
 
 
+test_labels = np.zeros((206, 1), dtype='uint8')
+test_images = np.zeros((206, img_width, img_height, 3), dtype='uint8')
 
-#pneumoniatesting part
- 
-read_folder_name2 = "/content/drive/MyDrive/Dataset/PneumoniaCT"
+test_Covid = np.zeros((103, img_width, img_height, 3), dtype='uint8')
+test_Non_Covid = np.zeros((103, img_width, img_height, 3), dtype='uint8')
 
+covidtest = 0
+noncovidtest = 0
 
-with open('pneumoniatest.csv', mode='w') as file:
+for z in range(206):
+    if z % 2 == 0:
+        imagecovidtest = os.listdir("D:/Graduation project/srs-20210710T173116Z-001/srs/noncovidtest")
+        img2 = cv2.imread("D:/Graduation project/srs-20210710T173116Z-001/srs/noncovidtest/" + imagecovidtest[covidtest])
+        img2 = cv2.medianBlur(img2, 3)
+        test_Covid[covidtest] = cv2.resize(img2, (224, 224))
+        test_images[z] = cv2.resize(img2, (224, 224))
+        test_labels[z] = 1
+        covidtest = covidtest + 1
 
-    writer = csv.writer(file)
-    x=(int)(337*0.3)  
-    for j in range(x):
-      imagepneumoniatest = os.listdir(read_folder_name2 )[j]
-      writer.writerow([imagepneumoniatest,"0"])
-
-
-
-
-#pneumoniatranning part
-      
-read_folder_name3 = "/content/drive/MyDrive/Dataset/PneumoniaCT"
-
-with open('pneumoniatrain.csv', mode='w') as file:
-
-    writer = csv.writer(file)
-
-    n=(int)(337*0.3)
-    y=337
-    for j in range(y):
-      while j>n:
-        imagepneumoniatrain = os.listdir(read_folder_name3 )[j]
-        writer.writerow([imagepneumoniatrain,"0"])
-        break 
+    else:
+        imgnoncovidtest = os.listdir("D:/Graduation project/srs-20210710T173116Z-001/srs/covidtest")
+        img2 = cv2.imread("D:/Graduation project/srs-20210710T173116Z-001/srs/covidtest/" + imgnoncovidtest[noncovidtest])
+        img2 = cv2.medianBlur(img2, 3)
+        test_Non_Covid[noncovidtest] = cv2.resize(img2, (224, 224))
+        test_images[z] = cv2.resize(img2, (224, 224))
+        test_labels[z] = 0
+        noncovidtest = noncovidtest + 1
 
 
+model = Sequential()
+model.add(Conv2D(32, 3, padding="same", activation="relu", input_shape=(224, 224, 3)))
+model.add(MaxPool2D())
 
-train_images = np.zeros((600, img_width, img_height, 3), dtype='uint8')
-train_labels = np.zeros((600, 1), dtype='uint8')
+model.add(Conv2D(32, 3, padding="same", activation="relu"))
+model.add(MaxPool2D())
 
+model.add(Conv2D(64, 3, padding="same", activation="relu"))
+model.add(MaxPool2D())
+model.add(Dropout(0.4))
 
-for x in range(273):
-  if x % 2 == 0:
-    imgcovid = os.listdir("/content/drive/MyDrive/srs/covidtrain")
-    img = cv2.imread(imgcovid[0])
-    img = cv2.medianBlur(img, 3)
-    img=train_images[x]
-    train_labels[x]=1
+model.add(Flatten())
+model.add(Dense(128, activation="relu"))
+model.add(Dense(2, activation="softmax"))
 
-  else:
-    imgpneumoniatrain = os.listdir("/content/drive/MyDrive/srs/pneumoniatrain")
-    img = cv2.imread(imgpneumoniatrain[0])
-    img = cv2.medianBlur(img, 3)
-    img=train_images[x]
-    train_labels[x]=0   
+model.summary()
+opt = Adam(lr=0.000001)
+model.compile(optimizer=opt, loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True), metrics=['accuracy'])
 
+results = model.fit(train_images, train_labels, batch_size=32, epochs=3)
 
-#part2
+results1 = model.evaluate(test_images, test_labels, batch_size=32)
+predictions = model.predict_classes(test_images)
+print(predictions)
+print(tf.math.confusion_matrix(labels=test_labels, predictions=predictions))
 
-test_labels = np.zeros((300, 1), dtype='uint8')
-test_images = np.zeros((300, img_width, img_height, 3), dtype='uint8')
-
-for z in range(117):
-  if  z % 2 == 0:
-    imagecovidtest = os.listdir("/content/drive/MyDrive/srs/covidtest")
-    img2 = cv2.imread(imagecovidtest[0])
-    img2 = cv2.medianBlur(img2, 3)
-    img2=test_images[z]
-    test_labels[z]=1
-  else:
-    imgpneumoniatest = os.listdir("/content/drive/MyDrive/srs/pneumoniatest")
-    img2 = cv2.imread(imgpneumoniatest[0])
-    img = cv2.medianBlur(img, 3)
-    img2= test_images[z]
-    test_labels[z]=0
-
-
-model = Sequential() 
-model.add(Conv2D(64, (3, 3),input_shape = input_shape)) 
-model.add(Activation('relu')) 
-model.add(MaxPooling2D(pool_size =(3, 3))) 
-
-model.add(Conv2D(64, (3, 3))) 
-model.add(Activation('relu')) 
-model.add(MaxPooling2D(pool_size =(3, 3))) 
-
-model.add(Conv2D(64, (3,3))) 
-model.add(Activation('relu')) 
-model.add(MaxPooling2D(pool_size =(3, 3))) 
-
-model.add(Flatten()) 
-model.add(Dense(64)) 
-model.add(Activation('relu')) 
-model.add(Dropout(0.5)) 
-model.add(Dense(1)) 
-model.add(Activation('sigmoid')) 
-
-model.compile(loss ='binary_crossentropy', 
-                optimizer ='rmsprop', 
-              metrics =['accuracy']) 
-
-results=model.fit(train_images, train_labels, epochs=6)
-
-results1 = model.evaluate(test_images,test_labels, batch_size=100)
 model.save("my_model")
+
+
+from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
+from tensorflow.keras.preprocessing import image
+
+# Helper libraries
+import numpy as np
+
+
+def classifypneumonia(test_images):
+    img = image.load_img(test_images, target_size=(224, 224))
+    img_array = image.img_to_array(img)
+    img_batch = np.expand_dims(img_array, axis=0)
+    img_preprocessed = preprocess_input(img_batch)
+    prediction = model.predict(img_preprocessed)
+    print(prediction)
+    # result=np.max(prediction)
+    result = np.argmax(prediction, axis=1)
+    # result= img_array.index(np.max(prediction))
+    # result=prediction.index(max(prediction))
+    print(result)
+
+    # print(result)
+    if result == [1]:
+        if 0.5 <= result <= 1.0:
+            return "Positive Pneumonia"
+    else:
+        return "Negative pneumonia"
+
+
+
+# def returnstring(result):
+#     if 0.6 <= result <= 1.0:
+#       print("postive")
