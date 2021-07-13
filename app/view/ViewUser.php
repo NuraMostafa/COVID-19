@@ -5,11 +5,14 @@ class ViewUser extends View{
 
 	public function output(){
 		$str="";
-		$str.="<h1>".$this->model->getUserName()."</h1>";
-		$str.="<h5>".$this->model->getGender()."</h5>";
-		$str.="<h5>".$this->model->getDateOfBirth()."</h5>";
+		$str.="<h1>Welcome ".$this->model->getUserName()."</h1>";
+		$str.="<h5>Gender: ".$this->model->getGender()."</h5>";
+		$str.="<h5>Phone: ".$this->model->getDateOfBirth()."</h5>";
 		$str.="<br><br>";
-	
+		$str.="<a href='profile.php?action=edit'>Edit Profile </a><br><br>";
+		$str.="<a href='profile.php?action=movie'>My Movies </a><br><br>";
+		$str.="<a href='profile.php?action=signOut'>SignOut </a><br><br>";
+		$str.="<a href='profile.php?action=delete'>Delete Account </a>";
 		return $str;
 	}
 		
@@ -379,14 +382,24 @@ $str = ' <div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 
 function testsform(){
 $str=' <div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
-<form method="POST" action="tests.php?action=addTest" enctype="multipart/form-data" style="   max-width: 100%;
+<form method="POST" action="http://192.168.1.7:5000/uploadImage" enctype="multipart/form-data" style="   max-width: 100%; margin: 0 auto;  
+	display: block;">
+
+<div class= "input-container">
+<input type="email" class="inputemail" placeholder="Enter your email..." required name="email" onkeyup="filter(this)" id="email"><br>
+</div>
+<h4 style= " color: #114C56; font-size: 25px;">Insert CT image:</h4>
+<input class="inputtest" type="file" accept="image/*" name="image"><br><br>
+<div class="input_wrapper">
+<div class="regerv_btn"><button type="submit" name="save" class="btn_2" style="width: 200px;">Submit</button></div>
+</div>
+</form>
+<form method="POST"  action="http://192.168.1.7:5000/uploadText"  enctype="multipart/form-data" style="   max-width: 100%;
 margin: 0 auto;  
 display: block;">
 <div class= "input-container">
 <input type="email" class="inputemail" placeholder="Enter your email..." required name="email" onkeyup="filter(this)" id="email"><br>
 </div>
-<h4 style= " color: #114C56; font-size: 25px;">Insert CT image:</h4>
-<input class="inputtest" type="file" accept="img/*" name="image"><br><br>
 <div class="input_wrapper">
 <h4 style= " color: #114C56; font-size: 25px;">CRP:</h4>
 
