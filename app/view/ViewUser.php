@@ -382,7 +382,7 @@ $str = ' <div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 
 function testsform(){
 $str=' <div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
-<form method="POST" action="http://192.168.1.7:5000/uploadImage" enctype="multipart/form-data" style="   max-width: 100%; margin: 0 auto;  
+<form method="POST" action="http://192.168.1.4:5000/uploadImage" enctype="multipart/form-data" style="   max-width: 100%; margin: 0 auto;  
 	display: block;">
 
 <div class= "input-container">
@@ -394,7 +394,7 @@ $str=' <div style="margin: 0 auto; width:1500px;" class="form-group col-md-6">
 <div class="regerv_btn"><button type="submit" name="save" class="btn_2" style="width: 200px;">Submit</button></div>
 </div>
 </form>
-<form method="POST"  action="http://192.168.1.7:5000/uploadText"  enctype="multipart/form-data" style="   max-width: 100%;
+<form method="POST"  action="http://192.168.1.4:5000/uploadText"  enctype="multipart/form-data" style="   max-width: 100%;
 margin: 0 auto;  
 display: block;">
 <div class= "input-container">
