@@ -3,14 +3,40 @@ from werkzeug.utils import secure_filename
 from cnnct import classify
 from pneumonia import classifypneumonia
 from SVM import classifytests
+import csv
 app = Flask(__name__)
 
 
-# @app.route('/uploadText', methods=['POST'])
-# def uploadText():
-#     text = request.files['csvfile']
-#     predicttests=classifytests(text)
-#     return predicttests
+@app.route('/uploadText', methods=['POST'])
+def uploadText():
+    CRP = request.form['CPR']
+    Ferritin = request.form['Ferritin']
+    LDH = request.form['LDH']
+    ALT = request.form['ALT']
+    CBC = request.form['CBC']
+    DDimer=request.form['DDimer']
+    AST = request.form['AST']
+    header = ['CRP', 'Ferritin', 'LDH', 'ALT','CBC','DDimer','AST']
+    data = [CRP,Ferritin,LDH,ALT,CBC,DDimer,AST]
+    with open('bloodtests.csv', 'w', encoding='UTF8') as f:
+        writer = csv.writer(f)
+        writer.writerow(header)
+        writer.writerow(data)
+    predicttests=classifytests('bloodtests.csv')
+    return predicttests
+# import csv
+#
+# header = ['name', 'area', 'country_code2', 'country_code3']
+# data = ['Afghanistan', 652090, 'AF', 'AFG']
+#
+# with open('countries.csv', 'w', encoding='UTF8') as f:
+#     writer = csv.writer(f)
+#
+#     # write the header
+#     writer.writerow(header)
+#
+#     # write the data
+#     writer.writerow(data)
 
 
 @app.route('/uploadImage', methods=['POST'])
@@ -19,7 +45,11 @@ def upload_file():
     route = "rgb_img.jpg"
     file.save(route)
     predictresult=classify(route)
-    return (predictresult)
+    predictresult2=classifypneumonia(route)
+    if predictresult =="Positive Covid":
+        return predictresult
+    else:
+        return predictresult2
    # return render_template('home.html')
 
 
